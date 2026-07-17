@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+    
+    <link rel="stylesheet" href="../assets/css/student.css">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+<div class="logo">
+    <div class="logo-title">
+        <img src="/assets/images/logo.png" alt="ExamTrack Logo">
+        <h2>ExamTrack</h2>
+    </div>
+
+    <p>Exam & Grade Tracking System</p>
+</div>
+
+        <nav class="nav-menu">
+            <a href="#" class="nav-link active">
+                <img src="/assets/images/dash.png" alt="Dashboard">
+                 Dashboard
+            </a>
+
+            <a href="exams.html" class="nav-link">
+                <img src="/assets/images/exam.png" alt="">
+                Exams
+            </a>
+
+            <a href="result.html" class="nav-link">
+                <img src="/assets/images/result.png">
+                Results
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="profile.html" class="nav-link">
+                <img src="/assets/images/profile.png" alt="">
+                Profile
+            </a>
+
+            <button type="button" id="logoutBtn" class="logout-button">
+                <img src="/assets/images/logout.png" alt="">
+                Logout
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Welcome -->
+        <section class="welcome-section">
+
+            <div>
+                <h1>
+                    Welcome, <span id="studentName">Student</span>!
+                </h1>
+
+                <p>
+                    You have
+                    <span id="pendingExams">0</span>
+                    pending exams this week. Keep up the great work!
+                </p>
+            </div>
+
+
+        </section>
+
+        <!-- Statistics -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <img src="/assets/images/ACTIVE.png" alt="">
+                </div>
+
+                <div>
+                    <span>ACTIVE EXAMS</span>
+                    <strong id="activeExams">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <img src="/assets/images/COMPLETED.png" alt="">
+                </div>
+
+                <div>
+                    <span>COMPLETED</span>
+                    <strong id="completedExams">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <img src="/assets/images/avg.png" alt="">
+                </div>
+
+                <div>
+                    <span>AVG GRADE</span>
+                    <strong id="averageGrade">0%</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <img src="/assets/images/PASSED.png" alt="">
+                </div>
+
+                <div>
+                    <span>PASSED</span>
+                    <strong id="passedPercentage">0%</strong>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Available Exams -->
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+                <h2>Available Exams</h2>
+                <a href="exams.html">View All</a>
+            </div>
+
+            <!-- JavaScript adds exams here -->
+            <div class="exams-container" id="examsContainer"></div>
+
+            <p class="empty-message" id="noExamsMessage">
+                No available exams.
+            </p>
+
+        </section>
+
+        <!-- Latest Results -->
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+                <h2>Latest Results</h2>
+                <a href="results.html">View All</a>
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>EXAM NAME</th>
+                            <th>DATE TAKEN</th>
+                            <th>STATUS</th>
+                            <th>SCORE</th>
+                        </tr>
+                    </thead>
+
+                    <!-- JavaScript adds results here -->
+                    <tbody id="resultsTable"></tbody>
+
+                </table>
+
+                <p class="empty-message" id="noResultsMessage">
+                    No results available.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="/js/student/dashborad.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1177 @@
+/* =========================
+   General
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    color: #20202a;
+    background-color: #f7f7ff;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   Shared Layout
+========================= */
+
+.dashboard-layout,
+.profile-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   Shared Sidebar
+========================= */
+
+.sidebar {
+    width: 220px;
+    min-height: 100vh;
+    padding: 25px 15px;
+    background-color: #ffffff;
+    border-right: 1px solid #d8dbea;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.logo {
+    padding: 0;
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.logo-title img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.logo-title h2 {
+    color: #0058be;
+    font-size: 20px;
+}
+
+.logo p {
+    margin-top: 4px;
+    color: #333333;
+    font-size: 10px;
+}
+
+.nav-menu {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nav-link,
+.logout-button {
+    width: 100%;
+    padding: 11px 14px;
+    border: none;
+    border-radius: 7px;
+    color: #343442;
+    background: none;
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.nav-link img,
+.logout-button img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: white;
+    background-color: #8250ed;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #d7d9e5;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.logout-button {
+    color: #d7193f;
+}
+
+
+/* =========================
+   Shared Main Content
+========================= */
+
+.main-content {
+    flex: 1;
+    padding: 55px 70px;
+}
+
+
+/* =========================
+   Dashboard Welcome
+========================= */
+
+.welcome-section {
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.welcome-section h1 {
+    margin-bottom: 8px;
+    font-size: 26px;
+}
+
+.welcome-section p {
+    color: #59596a;
+    font-size: 13px;
+}
+
+/* Dashboard student image only */
+
+.dashboard-layout .student-image {
+    width: 44px;
+    height: 44px;
+    border: 2px solid #0763ce;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/* =========================
+   Dashboard Statistics
+========================= */
+
+.stats-grid {
+    margin-bottom: 45px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.stat-icon img {
+    width: 23px;
+    height: 23px;
+    object-fit: contain;
+}
+
+.stat-icon.blue {
+    background-color: #e2edff;
+}
+
+.stat-icon.purple {
+    background-color: #eee8ff;
+}
+
+.stat-icon.orange {
+    background-color: #f8ebe1;
+}
+
+.stat-icon.green {
+    background-color: #dff5e9;
+}
+
+.stat-card span {
+    color: #414151;
+    font-size: 10px;
+    display: block;
+}
+
+.stat-card strong {
+    margin-top: 4px;
+    font-size: 20px;
+    display: block;
+}
+
+
+/* =========================
+   Dashboard Sections
+========================= */
+
+.dashboard-section {
+    margin-bottom: 40px;
+}
+
+.section-heading {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-heading h2 {
+    font-size: 17px;
+}
+
+.section-heading a {
+    color: #0064cc;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+
+/* =========================
+   Dashboard Exam Cards
+========================= */
+
+.exams-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(240px, 300px));
+    gap: 20px;
+}
+
+.exam-card {
+    min-height: 190px;
+    padding: 18px;
+    border: 1px solid #c9cede;
+    border-radius: 10px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.exam-top {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.exam-priority {
+    width: fit-content;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #075fc4;
+    background-color: #deebff;
+    font-size: 9px;
+}
+
+.exam-card h3 {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.exam-subject {
+    color: #666676;
+    font-size: 11px;
+}
+
+.exam-details {
+    margin: 25px 0 18px;
+    color: #49495a;
+    font-size: 11px;
+    display: flex;
+    gap: 25px;
+}
+
+.start-exam-button,
+.start-button {
+    margin-top: auto;
+    padding: 9px;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    background-color: #075fc4;
+    cursor: pointer;
+}
+
+.start-exam-button:hover,
+.start-button:hover {
+    background-color: #034c9d;
+}
+
+
+/* =========================
+   Dashboard Results Table
+========================= */
+
+.table-container,
+.results-box {
+    overflow-x: auto;
+    border: 1px solid #cbd0df;
+    border-radius: 10px;
+    background-color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 14px 22px;
+    border-bottom: 1px solid #d7dbe7;
+    text-align: left;
+    font-size: 11px;
+}
+
+th {
+    color: #555567;
+    background-color: #f1f2fa;
+    font-size: 9px;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.result-subject {
+    margin-top: 3px;
+    color: #656576;
+    font-size: 10px;
+}
+
+.status {
+    padding: 4px 9px;
+    border-radius: 15px;
+    font-size: 9px;
+}
+
+.status.passed {
+    color: #078337;
+    background-color: #d9f8e2;
+}
+
+.status.failed {
+    color: #c92135;
+    background-color: #ffe0e4;
+}
+
+.score {
+    color: #0062c9;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.empty-message {
+    padding: 25px;
+    color: #777788;
+    text-align: center;
+    font-size: 13px;
+}
+
+
+/* =========================
+   Profile Page Title
+========================= */
+
+.page-title {
+    margin-bottom: 25px;
+}
+
+.page-title h1 {
+    margin-bottom: 8px;
+    font-size: 27px;
+}
+
+.page-title p {
+    color: #646473;
+    font-size: 13px;
+}
+
+
+/* =========================
+   Profile Top Section
+========================= */
+
+.profile-top {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 28px;
+}
+
+.student-card {
+    min-height: 220px;
+    padding: 18px;
+    border: 1px solid #dfe2ec;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+}
+
+/* Profile student image only */
+
+.profile-layout .student-image {
+    width: 110px;
+    height: 110px;
+    border: 4px solid #e8dcff;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.student-card h2 {
+    margin: 17px 0 8px;
+    font-size: 20px;
+}
+
+.role-badge {
+    padding: 4px 17px;
+    border-radius: 20px;
+    color: #252559;
+    background-color: #dfe7ff;
+    font-size: 11px;
+}
+
+
+/* =========================
+   Profile Information Cards
+========================= */
+
+.information-card {
+    overflow: hidden;
+    border: 1px solid #dfe2ec;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.card-header {
+    padding: 20px 27px;
+    background-color: #f0f1fb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-header img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.card-header h2 {
+    font-size: 17px;
+}
+
+.information-grid {
+    padding: 27px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 65px;
+}
+
+.information-item > span {
+    color: #575766;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.information-item p {
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+
+/* =========================
+   Profile Account Details
+========================= */
+
+.account-card {
+    margin-top: 85px;
+}
+
+.account-grid {
+    min-height: 170px;
+}
+
+.value-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.purple-dot {
+    background-color: #7d3ee8;
+}
+
+.green-dot {
+    background-color: #13b66c;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 900px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .exams-container {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-top {
+        grid-template-columns: 1fr;
+    }
+
+    .account-card {
+        margin-top: 30px;
+    }
+
+    .main-content {
+        padding: 35px;
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-layout,
+    .profile-layout {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .sidebar-bottom {
+        margin-top: 20px;
+    }
+
+    .main-content {
+        padding: 25px 15px;
+    }
+
+    .stats-grid,
+    .information-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================
+   Exam Page
+========================= */
+
+.exam-page {
+    min-height: 100vh;
+    background-color: #f7f7ff;
+}
+
+
+/* =========================
+   Exam Header
+========================= */
+
+.exam-header {
+    min-height: 75px;
+    padding: 15px 5%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #d9ddea;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.exam-logo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.exam-logo img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.exam-logo h2 {
+    color: #0058be;
+    font-size: 18px;
+}
+
+.exam-header > h3 {
+    padding-left: 25px;
+    border-left: 1px solid #d9ddea;
+    font-size: 15px;
+}
+
+.exam-header-info {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.question-count,
+.exam-timer {
+    padding: 8px 13px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.question-count {
+    color: #454556;
+    background-color: #f0f1f7;
+}
+
+.exam-timer {
+    color: #0063ca;
+    background-color: #e7f0ff;
+}
+
+
+/* =========================
+   Progress Bar
+========================= */
+
+.progress-container {
+    width: 100%;
+    height: 5px;
+    background-color: #e0e3ee;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: #0063ca;
+    transition: width 0.3s ease;
+}
+
+
+/* =========================
+   Exam Main Content
+========================= */
+
+.exam-main {
+    width: 90%;
+    max-width: 750px;
+    margin: 55px auto;
+}
+
+
+/* =========================
+   Question Card
+========================= */
+
+.question-card {
+    min-height: 350px;
+    padding: 30px;
+    border: 1px solid #d7dbe8;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.question-header {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.question-label {
+    color: #0063ca;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.question-type {
+    margin-left: 5px;
+    color: #0063ca;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.question-text {
+    margin-bottom: 25px;
+    color: #20202a;
+    font-size: 21px;
+}
+
+
+/* =========================
+   Answers
+========================= */
+
+.answers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.answer-option {
+    width: 100%;
+    min-height: 48px;
+    padding: 13px 15px;
+    border: 1px solid #d6dbe8;
+    border-radius: 7px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.answer-option:hover {
+    border-color: #0063ca;
+    background-color: #f3f7ff;
+}
+
+.answer-option:has(input:checked) {
+    border-color: #0063ca;
+    background-color: #eaf2ff;
+}
+
+.answer-option input {
+    accent-color: #0063ca;
+    cursor: pointer;
+}
+
+.answer-option span {
+    color: #414151;
+    font-size: 13px;
+}
+
+
+/* Short Answer */
+
+.short-answer-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d6dbe8;
+    border-radius: 7px;
+    outline: none;
+    font-size: 14px;
+}
+
+.short-answer-input:focus {
+    border-color: #0063ca;
+    box-shadow: 0 0 0 3px #dceaff;
+}
+
+
+/* Answer Message */
+
+.answer-message {
+    min-height: 18px;
+    margin-top: 15px;
+    color: #d7193f;
+    font-size: 12px;
+}
+
+
+/* =========================
+   Navigation Buttons
+========================= */
+
+.exam-navigation {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.previous-button,
+.next-button,
+.submit-exam-button {
+    min-width: 130px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 7px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.previous-button {
+    color: #343442;
+    background-color: #e5e7ef;
+}
+
+.previous-button:hover {
+    background-color: #d7d9e3;
+}
+
+.previous-button:disabled {
+    color: #9b9ba7;
+    background-color: #eeeeF3;
+    cursor: not-allowed;
+}
+
+.next-button,
+.submit-exam-button {
+    margin-left: auto;
+    color: #ffffff;
+    background-color: #0063ca;
+}
+
+.next-button:hover,
+.submit-exam-button:hover {
+    background-color: #034d9e;
+}
+
+/* Submit is hidden until final question */
+
+.submit-exam-button {
+    display: none;
+}
+
+
+/* =========================
+   Exam Responsive
+========================= */
+
+@media (max-width: 700px) {
+    .exam-header {
+        padding: 15px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .exam-header > h3 {
+        width: 100%;
+        padding-left: 0;
+        border-left: none;
+        order: 3;
+    }
+
+    .exam-header-info {
+        margin-left: auto;
+    }
+
+    .exam-main {
+        width: 92%;
+        margin: 30px auto;
+    }
+
+    .question-card {
+        min-height: 320px;
+        padding: 20px;
+    }
+
+    .question-text {
+        font-size: 18px;
+    }
+
+    .exam-navigation {
+        flex-wrap: wrap;
+    }
+
+    .previous-button,
+    .next-button,
+    .submit-exam-button {
+        flex: 1;
+    }
+}
+
+@media (max-width: 450px) {
+    .exam-logo h2 {
+        font-size: 16px;
+    }
+
+    .question-count,
+    .exam-timer {
+        padding: 7px 9px;
+        font-size: 10px;
+    }
+
+    .previous-button,
+    .next-button,
+    .submit-exam-button {
+        width: 100%;
+        flex: none;
+    }
+}
+/* =========================
+   Result Page
+========================= */
+
+.result-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.result-main {
+    position: relative;
+    flex: 1;
+    min-height: 100vh;
+    padding: 60px 30px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+
+/* =========================
+   Result Card
+========================= */
+
+.result-card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 520px;
+    margin-top: 40px;
+    padding: 35px 30px;
+    border: 1px solid #d9ddea;
+    border-top: 4px solid #0063ca;
+    border-radius: 10px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+
+/* =========================
+   Result Icon
+========================= */
+
+.result-icon {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    color: #0063ca;
+    background-color: #dfeaff;
+    font-size: 35px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================
+   Result Text
+========================= */
+
+.result-card h1 {
+    margin-bottom: 7px;
+    font-size: 25px;
+}
+
+.exam-name {
+    margin-bottom: 15px;
+    color: #696978;
+    font-size: 12px;
+}
+
+.result-badge {
+    padding: 5px 14px;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: #0063ca;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   Result Statistics
+========================= */
+
+.result-statistics {
+    margin: 28px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.result-stat {
+    min-height: 70px;
+    padding: 12px 7px;
+    border: 1px solid #dce0eb;
+    border-radius: 7px;
+    background-color: #f7f8fd;
+}
+
+.result-stat span {
+    color: #656574;
+    font-size: 8px;
+    font-weight: bold;
+    display: block;
+}
+
+.result-stat strong {
+    margin-top: 8px;
+    color: #22222c;
+    font-size: 18px;
+    display: block;
+}
+
+.result-message {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.result-description {
+    margin-bottom: 25px;
+    color: #696978;
+    font-size: 11px;
+}
+
+
+/* =========================
+   Review Button
+========================= */
+
+.review-exam-button {
+    min-width: 150px;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 7px;
+    color: #ffffff;
+    background-color: #0063ca;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.review-exam-button:hover {
+    background-color: #034d9e;
+}
+
+
+/* =========================
+   Passed State
+========================= */
+
+.result-card.passed {
+    border-top-color: #13b86d;
+}
+
+.result-card.passed .result-icon {
+    color: #0b9d59;
+    background-color: #cdf8e4;
+}
+
+.result-card.passed .result-badge {
+    background-color: #13b86d;
+}
+
+.result-card.passed #score,
+.result-card.passed #correctAnswers {
+    color: #0b9d59;
+}
+
+
+/* =========================
+   Failed State
+========================= */
+
+.result-card.failed {
+    border-top-color: #d92332;
+}
+
+.result-card.failed .result-icon {
+    color: #c91f2e;
+    background-color: #ffd9dd;
+}
+
+.result-card.failed .result-badge {
+    background-color: #d92332;
+}
+
+.result-card.failed #score,
+.result-card.failed #incorrectAnswers {
+    color: #d92332;
+}
+
+
+/* =========================
+   Confetti
+========================= */
+
+.confetti-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.confetti {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    from {
+        transform: translateY(-20px) rotate(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(700px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   Result Responsive
+========================= */
+
+@media (max-width: 700px) {
+    .result-main {
+        padding: 30px 15px;
+    }
+
+    .result-card {
+        margin-top: 10px;
+        padding: 25px 15px;
+    }
+
+    .result-statistics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .result-layout {
+        display: block;
+    }
+
+    .result-main {
+        min-height: auto;
+    }
+}
