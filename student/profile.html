@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile - ExamTrack</title>
+
+    <link rel="stylesheet" href="../assets/css/student.css">
+</head>
+
+<body>
+
+<div class="profile-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+    <div class="logo-title">
+        <img
+            src="../assets/images/logo.png"
+            alt="ExamTrack Logo"
+        >
+
+        <h2>ExamTrack</h2>
+    </div>
+
+    <p>Exam & Grade Tracking System</p>
+</div>
+
+
+        
+        <nav class="nav-menu">
+
+            <a href="dashboard.html" class="nav-link">
+                <img src="../assets/images/dash.png" alt="">
+                <span>Dashboard</span>
+            </a>
+
+            <a href="exam.html" class="nav-link">
+                <img src="../assets/images/exam.png" alt="">
+                <span>Exams</span>
+            </a>
+
+            <a href="result.html" class="nav-link">
+                <img src="../assets/images/result.png" alt="">
+                <span>Results</span>
+            </a>
+
+            
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="profile.html" class="nav-link active">
+                <img src="../assets/images/profile.png" alt="">
+                <span>Profile</span>
+            </a>
+
+            <button
+                type="button"
+                class="logout-button"
+                id="logoutBtn"
+            >
+                <img src="../assets/images/logout.png" alt="">
+                <span>Logout</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="page-title">
+            <h1>User Profile</h1>
+
+            <p>
+                View and manage your academic profile details.
+            </p>
+        </div>
+
+        <!-- Top Profile Section -->
+        <section class="profile-top">
+
+            <!-- Student Card -->
+            <div class="student-card">
+
+                <img
+                    id="studentImage"
+                    class="student-image"
+                    src="../assets/images/person.png"
+                    alt="Student"
+                >
+
+                <h2 id="studentName">Student Name</h2>
+
+                <span class="role-badge" id="studentRole">
+                    Student
+                </span>
+
+            </div>
+
+            <!-- Personal Information -->
+            <div class="information-card">
+
+                <div class="card-header">
+                    <img
+                        src="../assets/images/Container (8).png"
+                        alt=""
+                    >
+
+                    <h2>Personal Information</h2>
+                </div>
+
+                <div class="information-grid">
+
+                    <div class="information-item">
+                        <span>FULL NAME</span>
+                        <p id="fullName">—</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span>GENDER</span>
+                        <p id="gender">—</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span>NATIONAL ID</span>
+                        <p id="nationalId">—</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span>PHONE NUMBER</span>
+                        <p id="phoneNumber">—</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Account Details -->
+        <section class="information-card account-card">
+
+            <div class="card-header">
+                <img
+                    src="../assets/images/Container (6).png"
+                    alt=""
+                >
+
+                <h2>Account Details</h2>
+            </div>
+
+            <div class="information-grid account-grid">
+
+                <div class="information-item">
+                    <span>EMAIL ADDRESS</span>
+                    <p id="email">—</p>
+                </div>
+
+                <div class="information-item">
+                    <span>ROLE</span>
+
+                    <p class="value-status">
+                        <span class="dot purple-dot"></span>
+                        <span id="role">—</span>
+                    </p>
+                </div>
+
+                <div class="information-item">
+                    <span>USERNAME</span>
+                    <p id="username">—</p>
+                </div>
+
+                <div class="information-item">
+                    <span>STATUS</span>
+
+                    <p class="value-status">
+                        <span class="dot green-dot"></span>
+                        <span id="status">—</span>
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="../js/student/profile.js"></script>
+
+</body>
+</html>

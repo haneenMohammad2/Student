@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Exam Session - ExamTrack</title>
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/student.css"
+    >
+</head>
+
+<body>
+
+<div class="exam-page">
+
+    <!-- Exam Header -->
+    <header class="exam-header">
+
+        <div class="exam-logo">
+            <img
+                src="../assets/images/logo.png"
+                alt="ExamTrack Logo"
+            >
+
+            <h2>ExamTrack</h2>
+        </div>
+
+        <h3 id="examTitle">
+            Exam
+        </h3>
+
+        <div class="exam-header-info">
+
+            <span class="question-count">
+                <span id="currentQuestionNumber">1</span>
+                /
+                <span id="totalQuestions">0</span>
+                Questions
+            </span>
+
+            <span class="exam-timer">
+                ⏱
+                <span id="timer">00:00</span>
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- Progress -->
+    <div class="progress-container">
+
+        <div
+            class="progress-bar"
+            id="progressBar"
+        ></div>
+
+    </div>
+
+
+    <!-- Main Exam Content -->
+    <main class="exam-main">
+
+        <!-- Question Card -->
+        <section class="question-card">
+
+            <div class="question-header">
+
+                <div>
+                    <span
+                        class="question-label"
+                        id="questionLabel"
+                    >
+                        QUESTION 1
+                    </span>
+
+                    <span
+                        class="question-type"
+                        id="questionType"
+                    >
+                        QUESTION TYPE
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- Question Text -->
+            <h2
+                class="question-text"
+                id="questionText"
+            >
+                Loading question...
+            </h2>
+
+
+            <!-- JavaScript adds answers here -->
+            <div
+                class="answers-container"
+                id="answersContainer"
+            ></div>
+
+
+            <!-- Error Message -->
+            <p
+                class="answer-message"
+                id="answerMessage"
+            ></p>
+
+        </section>
+
+
+        <!-- Navigation Buttons -->
+        <div class="exam-navigation">
+
+            <button
+                type="button"
+                class="previous-button"
+                id="previousBtn"
+            >
+                Previous
+            </button>
+
+            <button
+                type="button"
+                class="next-button"
+                id="nextBtn"
+            >
+                Next
+            </button>
+
+            <button
+                type="button"
+                class="submit-exam-button"
+                id="submitBtn"
+            >
+                Finish & Submit Exam
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- JavaScript -->
+<script src="../js/student/exam.js"></script>
+
+
+</body>
+</html>

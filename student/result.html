@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Exam Result - ExamTrack</title>
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/student.css"
+    >
+</head>
+
+<body>
+
+<div class="result-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <!-- Logo -->
+        <div class="logo">
+
+            <div class="logo-title">
+
+                <img
+                    src="../assets/images/logo.png"
+                    alt="ExamTrack Logo"
+                >
+
+                <h2>ExamTrack</h2>
+
+            </div>
+
+            <p>Exam & Grade Tracking System</p>
+
+        </div>
+
+
+        <!-- Navigation -->
+        <nav class="nav-menu">
+
+            <a
+                href="dashboard.html"
+                class="nav-link"
+            >
+                <img
+                    src="../assets/images/dash.png"
+                    alt=""
+                >
+
+                <span>Dashboard</span>
+            </a>
+
+            <a
+                href="exams.html"
+                class="nav-link"
+            >
+                <img
+                    src="../assets/images/exam.png"
+                    alt=""
+                >
+
+                <span>Exams</span>
+            </a>
+
+            <a
+                href="result.html"
+                class="nav-link active"
+            >
+                <img
+                    src="../assets/images/result.png"
+                    alt=""
+                >
+
+                <span>Results</span>
+            </a>
+
+        </nav>
+
+
+        <!-- Sidebar Bottom -->
+        <div class="sidebar-bottom">
+
+            <a
+                href="profile.html"
+                class="nav-link"
+            >
+                <img
+                    src="../assets/images/profile.png"
+                    alt=""
+                >
+
+                <span>Profile</span>
+            </a>
+
+            <button
+                type="button"
+                class="logout-button"
+                id="logoutBtn"
+            >
+                <img
+                    src="../assets/images/logout.png"
+                    alt=""
+                >
+
+                <span>Logout</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="result-main">
+
+        <!-- Decorative Confetti -->
+        <div
+            class="confetti-container"
+            id="confettiContainer"
+        ></div>
+
+
+        <!-- Result Card -->
+        <section
+            class="result-card"
+            id="resultCard"
+        >
+
+            <!-- Result Icon -->
+            <div
+                class="result-icon"
+                id="resultIcon"
+            >
+                ✓
+            </div>
+
+
+            <!-- Result Heading -->
+            <h1 id="resultTitle">
+                Exam Result
+            </h1>
+
+            <p
+                class="exam-name"
+                id="examName"
+            >
+                Exam
+            </p>
+
+
+            <!-- Pass or Fail Badge -->
+            <span
+                class="result-badge"
+                id="resultStatus"
+            >
+                RESULT
+            </span>
+
+
+            <!-- Result Statistics -->
+            <div class="result-statistics">
+
+                <div class="result-stat">
+                    <span>SCORE</span>
+
+                    <strong id="score">
+                        0/100
+                    </strong>
+                </div>
+
+                <div class="result-stat">
+                    <span>CORRECT</span>
+
+                    <strong id="correctAnswers">
+                        0
+                    </strong>
+                </div>
+
+                <div class="result-stat">
+                    <span>INCORRECT</span>
+
+                    <strong id="incorrectAnswers">
+                        0
+                    </strong>
+                </div>
+
+                <div class="result-stat">
+                    <span>TOTAL QUESTIONS</span>
+
+                    <strong id="totalQuestionsResult">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <!-- Result Message -->
+            <h3
+                class="result-message"
+                id="resultMessage"
+            >
+                Your exam has been submitted.
+            </h3>
+
+            <p
+                class="result-description"
+                id="resultDescription"
+            >
+                Review your result below.
+            </p>
+
+
+            <!-- Review Button -->
+            <button
+                type="button"
+                class="review-exam-button"
+                id="reviewExamBtn"
+            >
+                Review Exam →
+            </button>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="../js/student/result.js"></script>
+
+</body>
+</html>
