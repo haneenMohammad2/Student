@@ -43,6 +43,25 @@ function addUser(user){
     return newUser;
 }
 
+//student
+function getStudents(){
+  return getUsers().filter((u)=>u.role==="Student")
+}
+
+function addStudent(user){
+return addUser({...user,role:"Student"})
+}
+
+
+
+
+//teacher
+function getTeacher(){
+  return getUsers().filter((u)=>u.role==="Teacher")
+}
+function addTeacher(user){
+return addUser({...user,role:"Teacher"})
+}
 
 
 
