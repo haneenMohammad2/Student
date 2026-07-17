@@ -36,6 +36,15 @@
   box-sizing: inherit;
 }
 
+a {
+  text-decoration: none;
+  color: var(--color-text);
+  list-style: none;
+  text-transform: none;
+  text-decoration: none;
+  
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -1100,6 +1109,10 @@ body {
     border-left: 1px solid var(--color-border);
     padding-top: 0;
     padding-left: 0.75rem;
+  }
+
+  .text-primary-for-students {
+    color: var(--bs-heading-color) !important;
   }
 
   .welcome h1 {
