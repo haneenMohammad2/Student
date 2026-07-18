@@ -68,7 +68,7 @@ window.addEventListener("DOMContentLoaded", function () {
         if (recentStudents.length === 0) {
             tbodyDashboard.innerHTML = `
                 <tr>
-                    <td colspan="3">
+                    <td colspan="4">
                         No students found.
                     </td>
                 </tr>
@@ -149,6 +149,16 @@ window.addEventListener("DOMContentLoaded", function () {
 
                         <td>
                             ${escapeHTML(lastExam)}
+                        </td>
+
+                        <td>
+                            <button
+                                type="button"
+                                class="btn-view"
+                                onclick="viewStudent('${student.id}')"
+                            >
+                                View
+                            </button>
                         </td>
                     </tr>
                 `;
@@ -427,6 +437,11 @@ function getResultDate(result) {
     }
 
     return date.getTime();
+}
+
+function viewStudent(studentId) {
+    window.location.href =
+        `student-details.html?studentId=${encodeURIComponent(studentId)}`;
 }
 
 function escapeHTML(value) {
