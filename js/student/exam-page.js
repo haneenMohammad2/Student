@@ -778,43 +778,46 @@ function showResult(result) {
     );
 
 
-    if (result.passed === true) {
+   if (result.passed === true) {
 
-        resultSection.classList.add(
-            "passed"
-        );
+    resultSection.classList.add("passed");
 
-        resultIcon.textContent = "✓";
+    resultIcon.innerHTML = `
+        <img
+            src="../assets/images/happy.png"
+            alt="Happy smile"
+        >
+    `;
 
-        resultTitle.textContent =
-            "Congratulations!";
+    resultTitle.textContent =
+        "Congratulations!";
 
-        resultStatus.textContent =
-            "Passed";
+    resultStatus.textContent =
+        "Passed";
 
-        resultMessage.textContent =
-            "You passed the exam successfully.";
+    resultMessage.textContent =
+        "You passed the exam successfully.";
 
-    } else {
+} else {
 
-        resultSection.classList.add(
-            "failed"
-        );
+    resultSection.classList.add("failed");
 
-        resultIcon.textContent = "✕";
+    resultIcon.innerHTML = `
+        <img
+            src="..../assets/images/sad.png"
+            alt="Sad smile"
+        >
+    `;
 
-        resultTitle.textContent =
-            "Exam Completed";
+    resultTitle.textContent =
+        "Exam Completed";
 
-        resultStatus.textContent =
-            "Failed";
+    resultStatus.textContent =
+        "Failed";
 
-        resultMessage.textContent =
-            "Keep practicing and try again next time.";
-
-    }
+    resultMessage.textContent =
+        "Keep practicing and try again next time.";
 }
-
 
 // =========================
 // Review button
@@ -1008,4 +1011,4 @@ if (reviewMode) {
     sessionStorage.removeItem(
         "reviewMode"
     );
-}
+}}
