@@ -209,8 +209,17 @@ function getTotalSubmissions() {
 
 // who is logged in
 function setSession(user) {
-  const session = { id: user.id, role: user.role };
-  localStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(session));
+  const session = {
+    id: user.id,
+    role: user.role,
+    loginAt: new Date().toISOString(),
+  };
+
+  localStorage.setItem(
+    STORAGE_KEYS.SESSION,
+    JSON.stringify(session)
+  );
+
   return session;
 }
 

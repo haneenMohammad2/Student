@@ -9,6 +9,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/css/teacher.css" />
+    <script src="../js/core/storage.js" defer></script>
+    <script src="../js/teacher/students.js" defer></script>
   </head>
   <body>
     <div class="dashboard">
@@ -129,7 +131,7 @@
         <header class="header">
           <div class="welcome">
             <h1 class="text-primary-for-students">Students Management</h1>
-            <p>View, add, edit, and manage student accounts.</p>
+            <p>Add, edit, and manage student accounts.</p>
           </div>
           <img
             class="picture-teacher"
@@ -164,7 +166,7 @@
             </div>
             <div class="description-stat">
               <p class="stat-label">Total Students</p>
-              <p class="stat-value">3</p>
+              <p class="stat-value" id="totalStudents"></p>
             </div>
           </div>
 
@@ -182,7 +184,11 @@
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" placeholder="Search students..." />
+            <input
+              type="text"
+              id="studentSearchInput"
+              placeholder="Search students..."
+            />
           </div>
 
           <button type="button" class="btn-outline">
@@ -203,7 +209,7 @@
             Filter
           </button>
 
-          <button type="button" class="btn-primary">
+          <button type="button" class="btn-primary" id="addStudentBtn">
             <svg
               width="16"
               height="16"
@@ -226,227 +232,27 @@
         <!-- Students table -->
         <section class="section-recent-students">
           <table class="content-recent-student">
-            <tr class="header-table-recent-student">
-              <th>Student Name</th>
-              <th>Gender</th>
-              <th>National ID</th>
-              <th>Phone Number</th>
-              <th>Username</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-            <tr>
-              <td>
-                <div class="student-name-cell">
-                  <div class="student-avatar">JS</div>
-                  <span class="text-strong">Jane Smith</span>
-                </div>
-              </td>
-              <td>Female</td>
-              <td>******3456</td>
-              <td>+962 7 9000 0001</td>
-              <td>jane.smith</td>
-              <td><span class="status-pill success">Active</span></td>
-              <td>
-                <div class="row-actions">
-                  <button type="button" class="icon-btn view" title="View">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"
-                      ></path>
-                      <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
-                  </button>
-                  <button type="button" class="icon-btn edit" title="Edit">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
-                      ></path>
-                      <path
-                        d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5Z"
-                      ></path>
-                    </svg>
-                  </button>
-                  <button type="button" class="icon-btn delete" title="Delete">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <polyline points="3 6 5 6 21 6"></polyline>
-                      <path
-                        d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"
-                      ></path>
-                      <path d="M10 11v6"></path>
-                      <path d="M14 11v6"></path>
-                      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="student-name-cell">
-                  <div class="student-avatar">JD</div>
-                  <span class="text-strong">John Doe</span>
-                </div>
-              </td>
-              <td>Male</td>
-              <td>******3457</td>
-              <td>+962 7 9000 0002</td>
-              <td>john.doe</td>
-              <td><span class="status-pill success">Active</span></td>
-              <td>
-                <div class="row-actions">
-                  <button type="button" class="icon-btn view" title="View">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"
-                      ></path>
-                      <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
-                  </button>
-                  <button type="button" class="icon-btn edit" title="Edit">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
-                      ></path>
-                      <path
-                        d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5Z"
-                      ></path>
-                    </svg>
-                  </button>
-                  <button type="button" class="icon-btn delete" title="Delete">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <polyline points="3 6 5 6 21 6"></polyline>
-                      <path
-                        d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"
-                      ></path>
-                      <path d="M10 11v6"></path>
-                      <path d="M14 11v6"></path>
-                      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="student-name-cell">
-                  <div class="student-avatar">MB</div>
-                  <span class="text-strong">Michael Brown</span>
-                </div>
-              </td>
-              <td>Male</td>
-              <td>******3458</td>
-              <td>+962 7 9000 0003</td>
-              <td>michael.brown</td>
-              <td><span class="status-pill neutral">Inactive</span></td>
-              <td>
-                <div class="row-actions">
-                  <button type="button" class="icon-btn view" title="View">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"
-                      ></path>
-                      <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
-                  </button>
-                  <button type="button" class="icon-btn edit" title="Edit">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
-                      ></path>
-                      <path
-                        d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5Z"
-                      ></path>
-                    </svg>
-                  </button>
-                  <button type="button" class="icon-btn delete" title="Delete">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <polyline points="3 6 5 6 21 6"></polyline>
-                      <path
-                        d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"
-                      ></path>
-                      <path d="M10 11v6"></path>
-                      <path d="M14 11v6"></path>
-                      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
+            <thead>
+              <tr class="header-table-recent-student">
+                <th>Student Name</th>
+                <th>Gender</th>
+                <th>National ID</th>
+                <th>Phone Number</th>
+                <th>Username</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="studentsTableBody"></tbody>
           </table>
 
-          <div class="pagination-bar">
-            <p>Showing 1-3 of 3 students</p>
-            <div class="pagination-controls">
-              <button type="button" class="btn-page" disabled>
-                &lsaquo; Previous
-              </button>
-              <button type="button" class="btn-page active">1</button>
-              <button type="button" class="btn-page">Next &rsaquo;</button>
-            </div>
+          <div class="pagination-controls">
+            <button type="button" class="btn-page" disabled>
+              &lsaquo; Previous
+            </button>
+            <button type="button" class="btn-page active">1</button>
+            <button type="button" class="btn-page">Next &rsaquo;</button>
           </div>
         </section>
       </main>

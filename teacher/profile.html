@@ -9,6 +9,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/css/teacher.css" />
+    <script src="../js/core/storage.js" defer></script>
+    <script src="../js/teacher/profile.js" defer></script>
   </head>
   <body>
     <div class="dashboard">
@@ -114,12 +116,9 @@
                 fill="#BA1A1A"
               />
             </svg>
-            <a
-              href="../index.html"
-              class="name-profile"
-              onclick="clearSession()"
-              >Logout</a
-            >
+            <a href="../index.html" class="name-profile" id="logoutLink">
+              Logout
+            </a>
           </div>
         </div>
       </nav>
@@ -139,10 +138,16 @@
             <div class="profile-avatar-wrap">
               <img
                 class="profile-avatar"
+                id="profileImage"
                 src="../assets/images/man.jpg"
-                alt="Dr. Elena Sterling"
+                alt="User profile image"
               />
-              <span class="verified-badge" title="Verified account">
+
+              <span
+                class="verified-badge"
+                id="verifiedBadge"
+                title="Verified account"
+              >
                 <svg
                   width="14"
                   height="14"
@@ -157,8 +162,10 @@
                 </svg>
               </span>
             </div>
-            <h2 class="profile-name">Dr. Elena Sterling</h2>
-            <p class="profile-role">Teacher</p>
+
+            <h2 class="profile-name" id="profileName">User Name</h2>
+
+            <p class="profile-role" id="profileRole">User</p>
           </div>
 
           <!-- Personal information -->
@@ -177,24 +184,29 @@
                 <circle cx="12" cy="7" r="4"></circle>
                 <path d="M5.5 21a6.5 6.5 0 0 1 13 0"></path>
               </svg>
+
               <h2>Personal Information</h2>
             </div>
+
             <div class="info-grid">
               <div class="info-item">
                 <p class="info-label">Full Name</p>
-                <p class="info-value">Elena Maria Sterling</p>
+                <p class="info-value" id="fullName">Not provided</p>
               </div>
+
               <div class="info-item">
                 <p class="info-label">Gender</p>
-                <p class="info-value">Female</p>
+                <p class="info-value" id="gender">Not provided</p>
               </div>
+
               <div class="info-item">
                 <p class="info-label">Phone Number</p>
-                <p class="info-value">+1 (555) 234-8901</p>
+                <p class="info-value" id="phoneNumber">Not provided</p>
               </div>
+
               <div class="info-item">
-                <p class="info-label">Personal Information</p>
-                <p class="info-value">Faculty Office 402-B, Science Block</p>
+                <p class="info-label">National ID</p>
+                <p class="info-value" id="nationalId">Not provided</p>
               </div>
             </div>
           </div>
@@ -215,31 +227,43 @@
             >
               <circle cx="12" cy="12" r="10"></circle>
               <circle cx="12" cy="10" r="3"></circle>
+
               <path
                 d="M6.168 18.849A4 4 0 0 1 10 16h4a4 4 0 0 1 3.834 2.855"
               ></path>
             </svg>
+
             <h2>Account Details</h2>
           </div>
+
           <div class="info-grid">
             <div class="info-item">
               <p class="info-label">Email Address</p>
-              <p class="info-value">e.sterling@examtrack.edu</p>
+              <p class="info-value" id="emailAddress">Not provided</p>
             </div>
+
             <div class="info-item">
               <p class="info-label">Username</p>
-              <p class="info-value">dr_sterling_88</p>
+              <p class="info-value" id="username">Not provided</p>
             </div>
+
             <div class="info-item">
               <p class="info-label">Role</p>
+
               <p class="info-value with-dot">
-                <span class="status-dot purple"></span>Teacher
+                <span class="status-dot purple" id="roleStatusDot"></span>
+
+                <span id="accountRole"> User </span>
               </p>
             </div>
+
             <div class="info-item">
               <p class="info-label">Account Status</p>
+
               <p class="info-value with-dot">
-                <span class="status-dot green"></span>Active
+                <span class="status-dot green" id="accountStatusDot"></span>
+
+                <span id="accountStatus"> Active </span>
               </p>
             </div>
           </div>
@@ -261,11 +285,11 @@
             <path d="M3 3v5h5"></path>
             <path d="M12 7v5l4 2"></path>
           </svg>
+
           <div>
             <p class="last-login-title">Last login detected</p>
-            <p class="last-login-sub">
-              October 24, 2026 at 09:14 AM from Mac Desktop
-            </p>
+
+            <p class="last-login-sub" id="lastLogin">Not available</p>
           </div>
         </div>
       </main>
