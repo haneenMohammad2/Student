@@ -30,12 +30,16 @@
                 fill="#0058BE"
               />
             </svg>
+
             <p class="title">ExamTrack</p>
           </div>
+
           <h5 class="subtitle">Exam & Grade Tracking System</h5>
         </div>
+
         <div class="links">
-          <div class="link active">
+          <!-- Dashboard -->
+          <a href="#" class="link active">
             <svg
               class="logo"
               width="18"
@@ -49,9 +53,12 @@
                 fill="#FFFBFF"
               />
             </svg>
-            <a href="#" class="name-link">Dashboard</a>
-          </div>
-          <div class="link">
+
+            <span class="name-link">Dashboard</span>
+          </a>
+
+          <!-- Exams -->
+          <a href="exams.html" class="link">
             <svg
               class="logo"
               width="18"
@@ -65,9 +72,12 @@
                 fill="#424754"
               />
             </svg>
-            <a href="exams.html" class="name-link">Exams</a>
-          </div>
-          <div class="link">
+
+            <span class="name-link">Exams</span>
+          </a>
+
+          <!-- Students -->
+          <a href="students.html" class="link">
             <svg
               class="logo"
               width="22"
@@ -81,11 +91,14 @@
                 fill="#424754"
               />
             </svg>
-            <a href="students.html" class="name-link">Students</a>
-          </div>
+
+            <span class="name-link">Students</span>
+          </a>
         </div>
+
         <div class="bottom-of-page">
-          <div class="link-profile">
+          <!-- Profile -->
+          <a href="profile.html" class="link-profile">
             <svg
               class="logo-profile"
               width="16"
@@ -99,9 +112,12 @@
                 fill="#424754"
               />
             </svg>
-            <a href="profile.html" class="name-profile">Profile</a>
-          </div>
-          <div class="link-logout">
+
+            <span class="name-profile">Profile</span>
+          </a>
+
+          <!-- Logout -->
+          <a href="../index.html" class="link-logout" onclick="clearSession()">
             <svg
               class="logo-logout"
               width="18"
@@ -115,13 +131,9 @@
                 fill="#BA1A1A"
               />
             </svg>
-            <a
-              href="../index.html"
-              class="name-profile"
-              onclick="clearSession()"
-              >Logout</a
-            >
-          </div>
+
+            <span class="name-profile">Logout</span>
+          </a>
         </div>
       </div>
 

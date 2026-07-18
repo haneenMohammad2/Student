@@ -9,9 +9,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/css/teacher.css" />
-   
+
     <script src="../js/core/storage.js" defer></script>
-     <script src="../js/core/auth.js" defer></script>
+    <script src="../js/core/auth.js" defer></script>
     <script src="../js/teacher/exams.js" defer></script>
   </head>
   <body>
@@ -33,12 +33,15 @@
                 fill="#0058BE"
               />
             </svg>
+
             <p class="title">ExamTrack</p>
           </div>
+
           <h5 class="subtitle">Academic Management</h5>
         </div>
+
         <div class="links">
-          <div class="link">
+          <a href="dashboard.html" class="link">
             <svg
               class="logo"
               width="18"
@@ -52,9 +55,11 @@
                 fill="#424754"
               />
             </svg>
-            <a href="dashboard.html" class="name-link">Dashboard</a>
-          </div>
-          <div class="link active">
+
+            <span class="name-link">Dashboard</span>
+          </a>
+
+          <a href="exams.html" class="link active">
             <svg
               class="logo"
               width="18"
@@ -68,9 +73,11 @@
                 fill="#FFFBFF"
               />
             </svg>
-            <a href="exams.html" class="name-link">Exams</a>
-          </div>
-          <div class="link">
+
+            <span class="name-link">Exams</span>
+          </a>
+
+          <a href="students.html" class="link">
             <svg
               class="logo"
               width="22"
@@ -84,11 +91,13 @@
                 fill="#424754"
               />
             </svg>
-            <a href="students.html" class="name-link">Students</a>
-          </div>
+
+            <span class="name-link">Students</span>
+          </a>
         </div>
+
         <div class="bottom-of-page">
-          <div class="link-profile">
+          <a href="profile.html" class="link-profile">
             <svg
               class="logo-profile"
               width="16"
@@ -102,9 +111,11 @@
                 fill="#424754"
               />
             </svg>
-            <a href="profile.html" class="name-profile">Profile</a>
-          </div>
-          <div class="link-logout">
+
+            <span class="name-profile">Profile</span>
+          </a>
+
+          <a href="../index.html" class="link-logout" onclick="clearSession()">
             <svg
               class="logo-logout"
               width="18"
@@ -118,13 +129,9 @@
                 fill="#BA1A1A"
               />
             </svg>
-            <a
-              href="../index.html"
-              class="name-profile"
-              onclick="clearSession()"
-              >Logout</a
-            >
-          </div>
+
+            <span class="name-profile">Logout</span>
+          </a>
         </div>
       </nav>
 
@@ -313,7 +320,7 @@
 
         <!-- Search + filter -->
         <div class="table-toolbar">
-          <div class="search-box" >
+          <div class="search-box">
             <svg
               width="16"
               height="16"
@@ -327,7 +334,11 @@
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="examSearchInput" placeholder="Search exams by title..." />
+            <input
+              type="text"
+              id="examSearchInput"
+              placeholder="Search exams by title..."
+            />
           </div>
           <div class="filter-inline">
             <label for="statusFilter">Filter by status:</label>
