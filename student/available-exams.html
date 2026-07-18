@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Available Exams - ExamTrack</title>
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/student.css"
+    >
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+<!-- Sidebar -->
+
+        <aside class="sidebar">
+
+            <div class="logo">
+
+                <div class="logo-title">
+
+                    <img
+                        src="../assets/images/logo1.png"
+                        alt="ExamTrack Logo"
+                    >
+
+                    <h2>ExamTrack</h2>
+
+                </div>
+
+                <p>Exam & Grade Tracking System</p>
+
+            </div>
+
+
+            <!-- Navigation -->
+
+            <nav class="nav-menu">
+
+                <a
+                    href="dashboard.html"
+                    class="nav-link "
+                >
+                    <img
+                        src="../assets/images/dash.png"
+                        alt="Dashboard"
+                    >
+
+                    Dashboard
+                </a>
+
+                <a
+                    href="available-exams.html"
+                    class="nav-link active" 
+                >
+                    <img
+                        src="../assets/images/exam.png"
+                        alt="Exams"
+                    >
+
+                    Exams
+                </a>
+
+                <a
+                    href="results.html"
+                    class="nav-link"
+                >
+                    <img
+                        src="../assets/images/result.png"
+                        alt="Results"
+                    >
+
+                    Results
+                </a>
+
+            </nav>
+
+
+            <!-- Sidebar bottom -->
+
+            <div class="sidebar-bottom">
+
+                <a
+                    href="profile.html"
+                    class="nav-link"
+                >
+                    <img
+                        src="../assets/images/profile.png"
+                        alt="Profile"
+                    >
+
+                    Profile
+                </a>
+
+                <a
+                    href="../index.html"
+                    class="nav-link"
+                    onclick="clearSession()"
+                    id="logoutLink"
+                >
+                    <img
+                        src="../assets/images/logout.png"
+                        alt="Logout"
+                    >
+
+                    Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+
+    <!-- Main content -->
+    <main class="main-content">
+
+        <div class="welcome-section">
+            <div>
+                <h1>Available Exams</h1>
+                <p>Active exams you're eligible to take right now.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div id="examsContainer" class="exams-container">
+                
+            </div>
+            <p id="emptyMessage" class="empty-message" style="display:none;">
+                No active exams available right now. Check back later.
+            </p>
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="../js/core/storage.js"></script>
+<script src="../js/core/auth.js"></script>
+<script src="../js/student/available-exams.js"></script>
+
+</body>
+</html>

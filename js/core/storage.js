@@ -165,6 +165,9 @@ function removeQuestionFromExam(examId, questionId) {
   const updatedQuestions = exam.questions.filter((q) => q.id !== questionId);
   updateExam(examId, { questions: updatedQuestions });
 }
+function hasStudentTakenExam(studentId,examId){
+return getResultByStudentAndExam(studentId,examId)!==null;
+}
 
 
 

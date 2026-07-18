@@ -149,7 +149,7 @@ document.getElementById(
         // Display only the first two exams
 
         activeExams
-            .slice(0, 2)
+            .slice(0, 3)
             .forEach(function (exam) {
 
                 let questionsNumber = 0;
@@ -168,37 +168,34 @@ document.getElementById(
                         exam.numQuestions;
 
                 }
+                const alreadyTaken = hasStudentTakenExam(student.id, exam.id);
+                const buttonHtml = alreadyTaken
+                    ? `<button type="button" class="start-exam-button completed" disabled>Already Submitted</button>`
+                    : `<button type="button" class="start-exam-button" onclick="startExam('${exam.id}')">Start Exam</button>`;
 
 
-                examsContainer.innerHTML += `
-                    <article class="exam-card">
 
-                        <h3>
-                            ${exam.title}
-                        </h3>
+               examsContainer.innerHTML += `
+    <article class="exam-card">
 
-                        <p class="exam-subject">
-                            ${exam.dateTime || "No date"}
-                        </p>
+        <h3>
+            ${exam.title}
+        </h3>
 
-                        <div class="exam-details">
+        <p class="exam-subject">
+            ${exam.dateTime || "No date"}
+        </p>
 
-                            <span>
-                                ${questionsNumber} Questions
-                            </span>
+        <div class="exam-details">
+            <span>
+                ${questionsNumber} Questions
+            </span>
+        </div>
 
-                        </div>
+        ${buttonHtml}
 
-                        <button
-                            type="button"
-                            class="start-exam-button"
-                            onclick="startExam('${exam.id}')"
-                        >
-                            Start Exam
-                        </button>
-
-                    </article>
-                `;
+    </article>
+`;
 
             });
 
@@ -316,7 +313,6 @@ document.getElementById(
 
 
 
-/*localStorage.removeItem("exam_session");*/
 function startExam(examId) {
 
     localStorage.setItem(
@@ -325,6 +321,6 @@ function startExam(examId) {
     );
 
     window.location.href =
-        "exam.html";
+        "exams.html";
 }
 

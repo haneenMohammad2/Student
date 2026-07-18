@@ -1238,3 +1238,13 @@ tbody tr:last-child td {
         min-height: auto;
     }
 }
+
+.start-exam-button.completed {
+    color: #9b9ba7;
+    background-color: #eeeef3;
+    cursor: not-allowed;
+}
+
+.start-exam-button.completed:hover {
+    background-color: #eeeef3; 
+}
