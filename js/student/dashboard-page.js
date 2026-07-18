@@ -6,7 +6,7 @@ const student = requireRole("Student");
 if (student) {
 
     // =========================
-    // Get data from storage.js
+    // Get data
     // =========================
 
     const activeExams =
@@ -16,21 +16,30 @@ if (student) {
         getResultsByStudent(student.id);
 
 
+    const pendingExamsList =
+        activeExams.filter(function (exam) {
+            return !hasStudentTakenExam(
+                student.id,
+                exam.id
+            );
+        });
+
+
     // =========================
     // Display student name
     // =========================
 
-  
-const studentDisplayName =
-    student.name ||
-    student.fullName ||
-    student.username ||
-    "Student";
+    const studentDisplayName =
+        student.name ||
+        student.fullName ||
+        student.username ||
+        "Student";
 
-document.getElementById(
-    "studentName"
-).textContent =
-    studentDisplayName;
+
+    document.getElementById(
+        "studentName"
+    ).textContent =
+        studentDisplayName;
 
 
     // =========================
@@ -39,24 +48,22 @@ document.getElementById(
 
     let totalGrades = 0;
 
+
     studentResults.forEach(
         function (result) {
-
             totalGrades +=
-                Number(result.score);
-
+                Number(result.score) || 0;
         }
     );
 
 
     let averageGrade = 0;
 
-    if (studentResults.length > 0) {
 
+    if (studentResults.length > 0) {
         averageGrade =
             totalGrades /
             studentResults.length;
-
     }
 
 
@@ -66,27 +73,25 @@ document.getElementById(
 
     let passedResults = 0;
 
+
     studentResults.forEach(
         function (result) {
-
             if (result.passed === true) {
                 passedResults++;
             }
-
         }
     );
 
 
     let passedPercentage = 0;
 
-    if (studentResults.length > 0) {
 
+    if (studentResults.length > 0) {
         passedPercentage =
             (
                 passedResults /
                 studentResults.length
             ) * 100;
-
     }
 
 
@@ -97,22 +102,26 @@ document.getElementById(
     document.getElementById(
         "pendingExams"
     ).textContent =
-        activeExams.length;
+        pendingExamsList.length;
+
 
     document.getElementById(
         "activeExams"
     ).textContent =
         activeExams.length;
 
+
     document.getElementById(
         "completedExams"
     ).textContent =
         studentResults.length;
 
+
     document.getElementById(
         "averageGrade"
     ).textContent =
         Math.round(averageGrade) + "%";
+
 
     document.getElementById(
         "passedPercentage"
@@ -129,10 +138,14 @@ document.getElementById(
             "examsContainer"
         );
 
+
     const noExamsMessage =
         document.getElementById(
             "noExamsMessage"
         );
+
+
+    examsContainer.innerHTML = "";
 
 
     if (activeExams.length === 0) {
@@ -146,56 +159,98 @@ document.getElementById(
             "none";
 
 
-        // Display only the first two exams
-
         activeExams
             .slice(0, 3)
             .forEach(function (exam) {
 
                 let questionsNumber = 0;
 
+
                 if (
                     exam.questions &&
                     exam.questions.length > 0
                 ) {
-
                     questionsNumber =
                         exam.questions.length;
 
                 } else if (exam.numQuestions) {
-
                     questionsNumber =
                         exam.numQuestions;
-
                 }
-                const alreadyTaken = hasStudentTakenExam(student.id, exam.id);
-                const buttonHtml = alreadyTaken
-                    ? `<button type="button" class="start-exam-button completed" disabled>Already Submitted</button>`
-                    : `<button type="button" class="start-exam-button" onclick="startExam('${exam.id}')">Start Exam</button>`;
 
 
+                const alreadyTaken =
+                    hasStudentTakenExam(
+                        student.id,
+                        exam.id
+                    );
 
-               examsContainer.innerHTML += `
-    <article class="exam-card">
 
-        <h3>
-            ${exam.title}
-        </h3>
+                const reviewHtml =
+                    alreadyTaken
+                        ? `
+                            <button
+                                type="button"
+                                class="review-link"
+                                onclick="reviewExam('${exam.id}')"
+                            >
+                                Review Answers
+                            </button>
+                          `
+                        : "";
 
-        <p class="exam-subject">
-            ${exam.dateTime || "No date"}
-        </p>
 
-        <div class="exam-details">
-            <span>
-                ${questionsNumber} Questions
-            </span>
-        </div>
+                const buttonHtml =
+                    alreadyTaken
+                        ? `
+                            <button
+                                type="button"
+                                class="start-exam-button completed"
+                                disabled
+                            >
+                                ✓ Already Submitted
+                            </button>
+                          `
+                        : `
+                            <button
+                                type="button"
+                                class="start-exam-button"
+                                onclick="startExam('${exam.id}')"
+                            >
+                                Start Exam
+                            </button>
+                          `;
 
-        ${buttonHtml}
 
-    </article>
-`;
+                examsContainer.innerHTML += `
+                    <article class="exam-card">
+
+                        <div class="exam-title-row">
+
+                            <h3>
+                                ${exam.title}
+                            </h3>
+
+                            ${reviewHtml}
+
+                        </div>
+
+                        <p class="exam-subject">
+                            ${exam.dateTime || "No date"}
+                        </p>
+
+                        <div class="exam-details">
+
+                            <span>
+                                ${questionsNumber} Questions
+                            </span>
+
+                        </div>
+
+                        ${buttonHtml}
+
+                    </article>
+                `;
 
             });
 
@@ -211,10 +266,14 @@ document.getElementById(
             "resultsTable"
         );
 
+
     const noResultsMessage =
         document.getElementById(
             "noResultsMessage"
         );
+
+
+    resultsTable.innerHTML = "";
 
 
     if (studentResults.length === 0) {
@@ -228,10 +287,9 @@ document.getElementById(
             "none";
 
 
-        // Display only the latest three results
-
         studentResults
-            .slice(0, 3)
+            .slice(-3)
+            .reverse()
             .forEach(function (result) {
 
                 const exam =
@@ -243,35 +301,32 @@ document.getElementById(
                 let examTitle =
                     "Unknown Exam";
 
-                if (exam) {
 
+                if (exam) {
                     examTitle =
                         exam.title;
-
                 }
 
 
                 let status =
                     "Failed";
 
-                if (result.passed === true) {
 
+                if (result.passed === true) {
                     status =
                         "Passed";
-
                 }
 
 
                 let resultDate =
                     "No date";
 
-                if (result.dateTaken) {
 
+                if (result.dateTaken) {
                     resultDate =
                         new Date(
                             result.dateTaken
                         ).toLocaleDateString();
-
                 }
 
 
@@ -287,13 +342,11 @@ document.getElementById(
                         </td>
 
                         <td>
-
                             <span
                                 class="status ${status.toLowerCase()}"
                             >
                                 ${status}
                             </span>
-
                         </td>
 
                         <td class="score">
@@ -310,17 +363,153 @@ document.getElementById(
 }
 
 
-
-
+// =========================
+// Start exam
+// =========================
 
 function startExam(examId) {
+
+    const currentStudent =
+        getCurrentUser();
+
+
+    if (
+        currentStudent &&
+        hasStudentTakenExam(
+            currentStudent.id,
+            examId
+        )
+    ) {
+        alert(
+            "You have already submitted this exam."
+        );
+
+        return;
+    }
+
 
     localStorage.setItem(
         "selectedExamId",
         examId
     );
 
+
+    sessionStorage.removeItem(
+        "reviewMode"
+    );
+
+    sessionStorage.removeItem(
+        "currentQuestion"
+    );
+
+    sessionStorage.removeItem(
+        "studentAnswers"
+    );
+
+
     window.location.href =
         "exams.html";
 }
 
+
+// =========================
+// Review answers
+// =========================
+
+function reviewExam(examId) {
+
+    const currentStudent =
+        getCurrentUser();
+
+
+    if (!currentStudent) {
+        window.location.href =
+            "../index.html";
+
+        return;
+    }
+
+
+    const result =
+        getResultByStudentAndExam(
+            currentStudent.id,
+            examId
+        );
+
+
+    if (!result) {
+        alert(
+            "Result not found."
+        );
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "selectedExamId",
+        examId
+    );
+
+
+    if (result.id) {
+        localStorage.setItem(
+            "selectedResultId",
+            result.id
+        );
+    }
+
+
+    sessionStorage.setItem(
+        "reviewMode",
+        "true"
+    );
+
+
+    window.location.href =
+        "exams.html";
+}
+
+
+// =========================
+// Logout
+// =========================
+
+const logoutBtn =
+    document.getElementById(
+        "logoutBtn"
+    );
+
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener(
+        "click",
+        function () {
+
+            localStorage.removeItem(
+                "exam_session"
+            );
+
+            localStorage.removeItem(
+                "currentUser"
+            );
+
+            localStorage.removeItem(
+                "selectedExamId"
+            );
+
+            localStorage.removeItem(
+                "selectedResultId"
+            );
+
+            sessionStorage.clear();
+
+
+            window.location.href =
+                "../index.html";
+
+        }
+    );
+
+}

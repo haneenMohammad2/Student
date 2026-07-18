@@ -3,204 +3,352 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Student Profile - ExamTrack</title>
 
-    <link rel="stylesheet" href="../assets/css/student.css">
+    <link
+        rel="stylesheet"
+        href="../assets/css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/student.css"
+    >
 </head>
 
 <body>
 
-<div class="profile-layout">
+    <div class="dashboard">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="logo">
-    <div class="logo-title">
-        <img
-            src="../assets/images/logo1.png"
-            alt="ExamTrack Logo"
-        >
+     <!-- Sidebar -->
+<aside class="side-bar">
 
-        <h2>ExamTrack</h2>
+    <!-- Logo -->
+    <div class="title-dashboard">
+
+        <div class="logo-title">
+
+            <img
+                src="../assets/images/logo1.png"
+                alt="ExamTrack Logo"
+            >
+
+            <p class="title">
+                ExamTrack
+            </p>
+
+        </div>
+
+        <p class="subtitle">
+            Exam &amp; Grade Tracking System
+        </p>
+
     </div>
 
-    <p>Exam & Grade Tracking System</p>
-</div>
+    <!-- Navigation -->
+    <nav class="links">
 
-
-        
-        <nav class="nav-menu">
-
-            <a href="dashboard.html" class="nav-link">
-                <img src="../assets/images/dash.png" alt="">
-                <span>Dashboard</span>
-            </a>
-
-            <a href="available-exams.html" class="nav-link">
-                <img src="../assets/images/exam.png" alt="">
-                <span>Exams</span>
-            </a>
-
-            <a href="results.html" class="nav-link">
-                <img src="../assets/images/result.png" alt="">
-                <span>Results</span>
-            </a>
-
-            
-
-        </nav>
-
-        <div class="sidebar-bottom">
-
-            <a href="profile.html" class="nav-link active">
-                <img src="../assets/images/profile.png" alt="">
-                <span>Profile</span>
-            </a>
-
-            <a
-                href="../index.html"
-                class="nav-link"
+        <a
+            href="dashboard.html"
+            class="link"
+        >
+            <img
+                src="../assets/images/dash.png"
+                alt=""
             >
-                    <img
-                        src="../assets/images/logout.png"
-                        alt="Logout"
-                    >
 
-                    Logout
-               </a>
-
-        </div>
-
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-
-        <div class="page-title">
-            <h1>User Profile</h1>
-
-            <p>
-                View and manage your academic profile details.
+            <p class="name-link">
+                Dashboard
             </p>
-        </div>
+        </a>
 
-        <!-- Top Profile Section -->
-        <section class="profile-top">
+        <a
+            href="exams.html"
+            class="link"
+        >
+            <img
+                src="../assets/images/exam.png"
+                alt=""
+            >
 
-            <!-- Student Card -->
-            <div class="student-card">
+            <p class="name-link">
+                Exams
+            </p>
+        </a>
 
-                <img
-                    id="studentImage"
-                    class="student-image"
-                    src="../assets/images/person.png"
-                    alt="Student"
-                >
+    </nav>
 
-                <h2 id="studentName">Student Name</h2>
+    <!-- Sidebar Bottom -->
+    <div class="bottom-of-page">
 
-                <span class="role-badge" id="studentRole">
-                    Student
-                </span>
+        <a
+            href="profile.html"
+            class="link-profile active"
+        >
+            <img
+                class="profile-icon"
+                src="../assets/images/profile.png"
+                alt=""
+            >
+
+            <span class="name-profile">
+                Profile
+            </span>
+        </a>
+
+       <button
+    type="button"
+    class="link-logout"
+    id="logoutBtn"
+>
+    <img
+        src="../assets/images/logout.png"
+        alt="Logout"
+    >
+
+    <span class="name-profile">
+        Logout
+    </span>
+
+</button>
+
+    </div>
+
+</aside>
+
+
+        <!-- =========================
+             Main Content
+        ========================== -->
+
+        <main class="container-content">
+
+            <!-- Page Title -->
+
+            <div class="page-title">
+
+                <h1>
+                    User Profile
+                </h1>
+
+                <p>
+                    View and manage your academic profile details.
+                </p>
 
             </div>
 
-            <!-- Personal Information -->
-            <div class="information-card">
+
+            <!-- =========================
+                 Profile Top Section
+            ========================== -->
+
+            <section class="profile-top">
+
+                <!-- Student Card -->
+
+                <div class="student-card">
+
+                    <img
+                        id="studentImage"
+                        class="student-image"
+                        src="../assets/images/person.png"
+                        alt="Student"
+                    >
+
+                    <h2 id="studentName">
+                        Student Name
+                    </h2>
+
+                    <span
+                        class="role-badge"
+                        id="studentRole"
+                    >
+                        Student
+                    </span>
+
+                </div>
+
+
+                <!-- Personal Information -->
+
+                <div class="information-card">
+
+                    <div class="card-header">
+
+                        <img
+                            src="../assets/images/Container (8).png"
+                            alt=""
+                        >
+
+                        <h2>
+                            Personal Information
+                        </h2>
+
+                    </div>
+
+                    <div class="information-grid">
+
+                        <div class="information-item">
+
+                            <span>
+                                FULL NAME
+                            </span>
+
+                            <p id="fullName">
+                                —
+                            </p>
+
+                        </div>
+
+                        <div class="information-item">
+
+                            <span>
+                                GENDER
+                            </span>
+
+                            <p id="gender">
+                                —
+                            </p>
+
+                        </div>
+
+                        <div class="information-item">
+
+                            <span>
+                                NATIONAL ID
+                            </span>
+
+                            <p id="nationalId">
+                                —
+                            </p>
+
+                        </div>
+
+                        <div class="information-item">
+
+                            <span>
+                                PHONE NUMBER
+                            </span>
+
+                            <p id="phoneNumber">
+                                —
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 Account Details
+            ========================== -->
+
+            <section class="information-card account-card">
 
                 <div class="card-header">
+
                     <img
-                        src="../assets/images/Container (8).png"
+                        src="../assets/images/Container (6).png"
                         alt=""
                     >
 
-                    <h2>Personal Information</h2>
+                    <h2>
+                        Account Details
+                    </h2>
+
                 </div>
 
-                <div class="information-grid">
+                <div class="information-grid account-grid">
 
                     <div class="information-item">
-                        <span>FULL NAME</span>
-                        <p id="fullName">—</p>
+
+                        <span>
+                            EMAIL ADDRESS
+                        </span>
+
+                        <p id="email">
+                            —
+                        </p>
+
                     </div>
 
                     <div class="information-item">
-                        <span>GENDER</span>
-                        <p id="gender">—</p>
+
+                        <span>
+                            ROLE
+                        </span>
+
+                        <p class="value-status">
+
+                            <span class="dot purple-dot"></span>
+
+                            <span id="role">
+                                —
+                            </span>
+
+                        </p>
+
                     </div>
 
                     <div class="information-item">
-                        <span>NATIONAL ID</span>
-                        <p id="nationalId">—</p>
+
+                        <span>
+                            USERNAME
+                        </span>
+
+                        <p id="username">
+                            —
+                        </p>
+
                     </div>
 
                     <div class="information-item">
-                        <span>PHONE NUMBER</span>
-                        <p id="phoneNumber">—</p>
+
+                        <span>
+                            STATUS
+                        </span>
+
+                        <p class="value-status">
+
+                            <span class="dot green-dot"></span>
+
+                            <span id="status">
+                                —
+                            </span>
+
+                        </p>
+
                     </div>
 
                 </div>
 
-            </div>
+            </section>
 
-        </section>
+        </main>
 
-        <!-- Account Details -->
-        <section class="information-card account-card">
+    </div>
 
-            <div class="card-header">
-                <img
-                    src="../assets/images/Container (6).png"
-                    alt=""
-                >
 
-                <h2>Account Details</h2>
-            </div>
+    <!-- =========================
+         JavaScript Files
+    ========================== -->
 
-            <div class="information-grid account-grid">
+    <script src="../js/core/storage.js"></script>
 
-                <div class="information-item">
-                    <span>EMAIL ADDRESS</span>
-                    <p id="email">—</p>
-                </div>
+    <script src="../js/core/auth.js"></script>
 
-                <div class="information-item">
-                    <span>ROLE</span>
-
-                    <p class="value-status">
-                        <span class="dot purple-dot"></span>
-                        <span id="role">—</span>
-                    </p>
-                </div>
-
-                <div class="information-item">
-                    <span>USERNAME</span>
-                    <p id="username">—</p>
-                </div>
-
-                <div class="information-item">
-                    <span>STATUS</span>
-
-                    <p class="value-status">
-                        <span class="dot green-dot"></span>
-                        <span id="status">—</span>
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
-
-<script src="../js/core/storage.js"></script>
-<script src="../js/core/auth.js"></script>
-<script src="../js/student/profile-page.js"></script>
-
+    <script src="../js/student/profile-page.js"></script>
 
 </body>
+
 </html>

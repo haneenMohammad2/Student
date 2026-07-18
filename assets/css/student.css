@@ -1,18 +1,42 @@
-/* =========================
-   General
-========================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
+:root {
+    --color-bg: #f7f8fc;
+    --color-bg-tint: #eef1fb;
+    --color-surface: #ffffff;
+    --color-text: #191b23;
+    --color-text-soft: #6e7191;
+    --color-border: #e4e7f5;
+
+    --color-primary: #0058be;
+    --color-purple: #8455ef;
+    --color-fail: #ba1a1a;
+    --color-fail-bg: #ffdad6;
+
+    --font-body: 'Inter', sans-serif;
+
+    --radius: 10px;
+    --radius-lg: 16px;
+    --sidebar-w: 250px;
+}
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 body {
+    margin: 0;
     min-height: 100vh;
-    color: #20202a;
-    background-color: #f7f7ff;
-    font-family: Arial, sans-serif;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    font-family: var(--font-body);
+}
+
+a {
+    color: var(--color-text);
+    text-decoration: none;
 }
 
 
@@ -20,10 +44,16 @@ body {
    Shared Layout
 ========================= */
 
-.dashboard-layout,
-.profile-layout {
+.dashboard {
     display: flex;
     min-height: 100vh;
+    background-color: var(--color-bg);
+}
+
+.container-content {
+    flex: 1;
+    min-width: 0;
+    padding: 2rem 2.5rem 3rem;
 }
 
 
@@ -31,31 +61,29 @@ body {
    Shared Sidebar
 ========================= */
 
-.sidebar {
-    width: 220px;
-    min-height: 100vh;
-    padding: 25px 15px;
-    background-color: #ffffff;
-    border-right: 1px solid #d8dbea;
+.side-bar {
+    width: var(--sidebar-w);
+    height: 100vh;
+    padding: 1.75rem 1.25rem;
+    border-right: 1px solid var(--color-border);
+    background-color: var(--color-surface);
 
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+
+    position: sticky;
+    top: 0;
 }
 
-
-/* =========================
-   Logo
-========================= */
-
-.logo {
-    padding: 0;
+.title-dashboard {
+    margin-bottom: 2.5rem;
 }
 
 .logo-title {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
 }
 
 .logo-title img {
@@ -64,80 +92,63 @@ body {
     object-fit: contain;
 }
 
-.logo-title h2 {
-    color: #0058be;
-    font-size: 20px;
+.logo-title p.title {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
-.logo p {
-    margin-top: 4px;
-    color: #333333;
-    font-size: 10px;
+.subtitle {
+    margin: 6px 0 0;
+    color: var(--color-text-soft);
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
 }
-.sidebar .logo > p {
-    width: max-content;
-    white-space: nowrap !important;
-}
-/* Profile SVG icon */
 
-.logo-profile {
-    width: 17px;
-    height: 17px;
-    flex-shrink: 0;
-}
 
 /* =========================
-   Navigation
+   Sidebar Navigation
 ========================= */
 
-.nav-menu {
-    margin-top: 35px;
-
+.links {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 4px;
 }
 
-.nav-link,
-.logout-button {
-    width: 100%;
-    padding: 11px 14px;
-
-    border: none;
-    border-radius: 7px;
-
-    color: #343442;
-    background-color: transparent;
-
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    text-align: left;
+.link {
+    padding: 0.7rem 0.85rem;
+    border-radius: var(--radius);
+    color: var(--color-text);
 
     display: flex;
     align-items: center;
     gap: 12px;
 
     cursor: pointer;
-    transition: 0.3s;
+    transition: background-color 0.15s ease;
 }
 
-.nav-link img,
-.logout-button img {
-    width: 17px;
-    height: 17px;
-
-    object-fit: contain;
-    flex-shrink: 0;
+.link:hover {
+    background-color: var(--color-bg-tint);
 }
 
+.link .name-link {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
 
-/* Navigation hover and active page */
+.link.active,
+.link-profile.active {
+    background-color: var(--color-purple);
+}
 
-.nav-link:hover,
-.nav-link.active {
-    color: white;
-    background-color: #8250ed;
+.link.active .name-link,
+.link-profile.active .name-profile {
+    color: #ffffff;
 }
 
 
@@ -145,54 +156,103 @@ body {
    Sidebar Bottom
 ========================= */
 
-.sidebar-bottom {
+.bottom-of-page {
     margin-top: auto;
-    padding-top: 12px;
-
-    border-top: 1px solid #d7d9e5;
-
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 }
 
+.link-profile,
+.link-logout {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.65rem 0.85rem;
+    border: none;
+    border-radius: var(--radius);
+    background-color: transparent;
+    font-family: var(--font-body);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.link-profile:hover {
+    background-color: var(--color-bg-tint);
+}
+
+.link-logout:hover {
+    background-color: var(--color-fail-bg);
+}
+
+.link-profile .name-profile,
+.link-logout .name-profile {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.link-profile .name-profile {
+    color: var(--color-text);
+}
+
+.link-logout .name-profile {
+    color: var(--color-fail);
+}
+
+.link img,
+.link-profile img,
+.link-logout img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    flex-shrink: 0;
+    pointer-events: none;
+}
+
+@media (max-width: 640px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .side-bar {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .title-dashboard {
+        margin-bottom: 0;
+    }
+
+    .links {
+        flex-direction: row;
+    }
+
+    .bottom-of-page {
+        margin-top: 0;
+        padding-top: 0;
+        padding-left: 0.75rem;
+        border-top: none;
+        border-left: 1px solid var(--color-border);
+        flex-direction: row;
+    }
+}
 
 /* =========================
-   Logout Button
-========================= */
 
-.logout-button {
-    color: #d7193f;
-}
-
-
-/* Logout button hover */
-
-.logout-button:hover {
-    color:white;
-    background-color: #8250ed;
-}
-
-
-/* Logout button while clicking */
-
-.logout-button:active {
-    color:white;
-    background-color: #8250ed;
-    transform: scale(0.98);
-}
-
-
-/* =========================
-   Shared Main Content
-========================= */
-
-.main-content {
-    flex: 1;
-    padding: 55px 70px;
-}
-/* =========================
-   Dashboard Welcome
+Dashboard Welcome
 ========================= */
 
 .welcome-section {
@@ -201,8 +261,6 @@ body {
     align-items: center;
     justify-content: space-between;
 }
-
-
 
 .welcome-section h1 {
     margin-bottom: 8px;
@@ -214,9 +272,7 @@ body {
     font-size: 13px;
 }
 
-/* Dashboard student image only */
-
-.dashboard-layout .student-image {
+.welcome-section .student-image {
     width: 44px;
     height: 44px;
     border: 2px solid #0763ce;
@@ -318,8 +374,9 @@ body {
 ========================= */
 
 .exams-container {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, minmax(240px, 300px));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
 }
 
@@ -373,7 +430,7 @@ body {
     padding: 9px;
     border: none;
     border-radius: 7px;
-    color: white;
+    color: #ffffff;
     background-color: #075fc4;
     cursor: pointer;
 }
@@ -393,7 +450,7 @@ body {
     overflow-x: auto;
     border: 1px solid #cbd0df;
     border-radius: 10px;
-    background-color: white;
+    background-color: #ffffff;
 }
 
 table {
@@ -489,13 +546,11 @@ tbody tr:last-child td {
     padding: 18px;
     border: 1px solid #dfe2ec;
     border-radius: 10px;
-    background-color: white;
+    background-color: #ffffff;
     text-align: center;
 }
 
-/* Profile student image only */
-
-.profile-layout .student-image {
+.student-card .student-image {
     width: 110px;
     height: 110px;
     border: 4px solid #e8dcff;
@@ -525,7 +580,7 @@ tbody tr:last-child td {
     overflow: hidden;
     border: 1px solid #dfe2ec;
     border-radius: 10px;
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .card-header {
@@ -599,56 +654,6 @@ tbody tr:last-child td {
 }
 
 
-/* =========================
-   Responsive
-========================= */
-
-@media (max-width: 900px) {
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .exams-container {
-        grid-template-columns: 1fr;
-    }
-
-    .profile-top {
-        grid-template-columns: 1fr;
-    }
-
-    .account-card {
-        margin-top: 30px;
-    }
-
-    .main-content {
-        padding: 35px;
-    }
-}
-
-@media (max-width: 600px) {
-    .dashboard-layout,
-    .profile-layout {
-        display: block;
-    }
-
-    .sidebar {
-        width: 100%;
-        min-height: auto;
-    }
-
-    .sidebar-bottom {
-        margin-top: 20px;
-    }
-
-    .main-content {
-        padding: 25px 15px;
-    }
-
-    .stats-grid,
-    .information-grid {
-        grid-template-columns: 1fr;
-    }
-}
 /* =========================
    Exam Page
 ========================= */
@@ -835,7 +840,9 @@ tbody tr:last-child td {
 }
 
 
-/* Short Answer */
+/* =========================
+   Short Answer
+========================= */
 
 .short-answer-input {
     width: 100%;
@@ -852,7 +859,9 @@ tbody tr:last-child td {
 }
 
 
-/* Answer Message */
+/* =========================
+   Answer Message
+========================= */
 
 .answer-message {
     min-height: 18px;
@@ -896,7 +905,7 @@ tbody tr:last-child td {
 
 .previous-button:disabled {
     color: #9b9ba7;
-    background-color: #eeeeF3;
+    background-color: #eeeef3;
     cursor: not-allowed;
 }
 
@@ -912,108 +921,25 @@ tbody tr:last-child td {
     background-color: #034d9e;
 }
 
-/* Submit is hidden until final question */
-
 .submit-exam-button {
     display: none;
 }
 
 
 /* =========================
-   Exam Responsive
+   Result Card Inside Exam
 ========================= */
 
-@media (max-width: 700px) {
-    .exam-header {
-        padding: 15px;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
-    .exam-header > h3 {
-        width: 100%;
-        padding-left: 0;
-        border-left: none;
-        order: 3;
-    }
-
-    .exam-header-info {
-        margin-left: auto;
-    }
-
-    .exam-main {
-        width: 92%;
-        margin: 30px auto;
-    }
-
-    .question-card {
-        min-height: 320px;
-        padding: 20px;
-    }
-
-    .question-text {
-        font-size: 18px;
-    }
-
-    .exam-navigation {
-        flex-wrap: wrap;
-    }
-
-    .previous-button,
-    .next-button,
-    .submit-exam-button {
-        flex: 1;
-    }
+.result-card[hidden],
+.review-section[hidden] {
+    display: none;
 }
-
-@media (max-width: 450px) {
-    .exam-logo h2 {
-        font-size: 16px;
-    }
-
-    .question-count,
-    .exam-timer {
-        padding: 7px 9px;
-        font-size: 10px;
-    }
-
-    .previous-button,
-    .next-button,
-    .submit-exam-button {
-        width: 100%;
-        flex: none;
-    }
-}
-/* =========================
-   Result Page
-========================= */
-
-.result-layout {
-    display: flex;
-    min-height: 100vh;
-}
-
-.result-main {
-    position: relative;
-    flex: 1;
-    min-height: 100vh;
-    padding: 60px 30px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-
-/* =========================
-   Result Card
-========================= */
 
 .result-card {
     position: relative;
-    z-index: 2;
     width: 100%;
     max-width: 520px;
-    margin-top: 40px;
+    margin: 30px auto 0;
     padding: 35px 30px;
     border: 1px solid #d9ddea;
     border-top: 4px solid #0063ca;
@@ -1058,6 +984,7 @@ tbody tr:last-child td {
 }
 
 .result-badge {
+    display: inline-block;
     padding: 5px 14px;
     border-radius: 20px;
     color: #ffffff;
@@ -1113,8 +1040,16 @@ tbody tr:last-child td {
 
 
 /* =========================
-   Review Button
+   Result Buttons
 ========================= */
+
+.result-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 
 .review-exam-button {
     min-width: 150px;
@@ -1131,9 +1066,25 @@ tbody tr:last-child td {
     background-color: #034d9e;
 }
 
+.back-dashboard-button {
+    display: inline-block;
+    padding: 11px 20px;
+    border: 1px solid #0063ca;
+    border-radius: 7px;
+    color: #0063ca;
+    background-color: #ffffff;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.back-dashboard-button:hover {
+    color: #ffffff;
+    background-color: #0063ca;
+}
+
 
 /* =========================
-   Passed State
+   Passed Result
 ========================= */
 
 .result-card.passed {
@@ -1156,7 +1107,7 @@ tbody tr:last-child td {
 
 
 /* =========================
-   Failed State
+   Failed Result
 ========================= */
 
 .result-card.failed {
@@ -1179,44 +1130,160 @@ tbody tr:last-child td {
 
 
 /* =========================
-   Confetti
+   Review Answers
 ========================= */
 
-.confetti-container {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
+.review-section {
+    margin-top: 30px;
 }
 
-.confetti {
-    position: absolute;
-    width: 7px;
-    height: 7px;
-    border-radius: 2px;
-    animation: confettiFall 3s linear forwards;
+.review-header {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-@keyframes confettiFall {
-    from {
-        transform: translateY(-20px) rotate(0);
-        opacity: 1;
-    }
+.review-header h2 {
+    margin-bottom: 6px;
+    font-size: 24px;
+}
 
-    to {
-        transform: translateY(700px) rotate(360deg);
-        opacity: 0;
-    }
+.review-header p {
+    color: #696978;
+    font-size: 12px;
+}
+
+.back-result-button {
+    padding: 10px 18px;
+    border: 1px solid #0063ca;
+    border-radius: 7px;
+    color: #0063ca;
+    background-color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.back-result-button:hover {
+    color: #ffffff;
+    background-color: #0063ca;
+}
+
+.review-answers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.review-answer-card {
+    padding: 22px;
+    border: 1px solid #d9ddea;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.review-answer-card.correct {
+    border-left: 5px solid #13b86d;
+}
+
+.review-answer-card.incorrect {
+    border-left: 5px solid #d92332;
+}
+
+.review-question-number {
+    margin-bottom: 8px;
+    color: #0063ca;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.review-question-text {
+    margin-bottom: 16px;
+    font-size: 17px;
+}
+
+.review-user-answer,
+.review-correct-answer {
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.review-user-answer.correct {
+    color: #0b9d59;
+}
+
+.review-user-answer.incorrect {
+    color: #c91f2e;
+}
+
+.review-correct-answer {
+    color: #0b9d59;
 }
 
 
 /* =========================
-   Result Responsive
+   Responsive
 ========================= */
 
+@media (max-width: 900px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .exams-container {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-top {
+        grid-template-columns: 1fr;
+    }
+
+    .account-card {
+        margin-top: 30px;
+    }
+}
+
 @media (max-width: 700px) {
-    .result-main {
-        padding: 30px 15px;
+    .exam-header {
+        padding: 15px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .exam-header > h3 {
+        width: 100%;
+        padding-left: 0;
+        border-left: none;
+        order: 3;
+    }
+
+    .exam-header-info {
+        margin-left: auto;
+    }
+
+    .exam-main {
+        width: 92%;
+        margin: 30px auto;
+    }
+
+    .question-card {
+        min-height: 320px;
+        padding: 20px;
+    }
+
+    .question-text {
+        font-size: 18px;
+    }
+
+    .exam-navigation {
+        flex-wrap: wrap;
+    }
+
+    .previous-button,
+    .next-button,
+    .submit-exam-button {
+        flex: 1;
     }
 
     .result-card {
@@ -1230,21 +1297,81 @@ tbody tr:last-child td {
 }
 
 @media (max-width: 600px) {
-    .result-layout {
-        display: block;
+    .stats-grid,
+    .information-grid {
+        grid-template-columns: 1fr;
     }
 
-    .result-main {
-        min-height: auto;
+    .review-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .result-buttons {
+        flex-direction: column;
+    }
+
+    .review-exam-button,
+    .back-dashboard-button {
+        width: 100%;
+        text-align: center;
     }
 }
 
-.start-exam-button.completed {
-    color: #9b9ba7;
+@media (max-width: 450px) {
+    .exam-logo h2 {
+        font-size: 16px;
+    }
+
+    .question-count,
+    .exam-timer {
+        padding: 7px 9px;
+        font-size: 10px;
+    }
+
+    .previous-button,
+    .next-button,
+    .submit-exam-button {
+        width: 100%;
+        flex: none;
+    }
+}
+
+/* =========================
+   Exam Review Link
+========================= */
+
+.exam-title-row {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.exam-title-row h3 {
+    margin: 0;
+}
+
+.review-link {
+    padding: 0;
+    border: none;
+    color: #0064cc;
+    background-color: transparent;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.review-link:hover {
+    text-decoration: underline;
+}
+
+.start-exam-button.completed,
+.start-exam-button.completed:hover {
+    color: #8b8b99;
     background-color: #eeeef3;
     cursor: not-allowed;
-}
-
-.start-exam-button.completed:hover {
-    background-color: #eeeef3; 
 }

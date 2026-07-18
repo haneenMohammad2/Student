@@ -24,13 +24,16 @@
 
 <body>
 
-<div class="dashboard-layout">
+    <div class="dashboard">
 
-<!-- Sidebar -->
+        <!-- =========================
+             Sidebar
+        ========================== -->
 
-        <aside class="sidebar">
+        <aside class="side-bar">
 
-            <div class="logo">
+            <!-- Logo -->
+            <div class="title-dashboard">
 
                 <div class="logo-title">
 
@@ -39,120 +42,154 @@
                         alt="ExamTrack Logo"
                     >
 
-                    <h2>ExamTrack</h2>
+                    <p class="title">
+                        ExamTrack
+                    </p>
 
                 </div>
 
-                <p>Exam & Grade Tracking System</p>
+                <p class="subtitle">
+                    Exam &amp; Grade Tracking System
+                </p>
 
             </div>
 
 
             <!-- Navigation -->
-
-            <nav class="nav-menu">
+            <nav class="links">
 
                 <a
                     href="dashboard.html"
-                    class="nav-link "
+                    class="link"
                 >
                     <img
                         src="../assets/images/dash.png"
-                        alt="Dashboard"
+                        alt=""
                     >
 
-                    Dashboard
+                    <p class="name-link">
+                        Dashboard
+                    </p>
                 </a>
+
 
                 <a
                     href="available-exams.html"
-                    class="nav-link active" 
+                    class="link active"
                 >
                     <img
                         src="../assets/images/exam.png"
-                        alt="Exams"
+                        alt=""
                     >
 
-                    Exams
-                </a>
-
-                <a
-                    href="results.html"
-                    class="nav-link"
-                >
-                    <img
-                        src="../assets/images/result.png"
-                        alt="Results"
-                    >
-
-                    Results
+                    <p class="name-link">
+                        Exams
+                    </p>
                 </a>
 
             </nav>
 
 
-            <!-- Sidebar bottom -->
-
-            <div class="sidebar-bottom">
+            <!-- Sidebar Bottom -->
+            <div class="bottom-of-page">
 
                 <a
                     href="profile.html"
-                    class="nav-link"
+                    class="link-profile"
                 >
                     <img
+                        class="profile-icon"
                         src="../assets/images/profile.png"
-                        alt="Profile"
+                        alt=""
                     >
 
-                    Profile
+                    <span class="name-profile">
+                        Profile
+                    </span>
                 </a>
 
-                <a
-                    href="../index.html"
-                    class="nav-link"
-                    onclick="clearSession()"
-                    id="logoutLink"
+
+                <button
+                    type="button"
+                    class="link-logout"
+                    id="logoutBtn"
                 >
                     <img
                         src="../assets/images/logout.png"
                         alt="Logout"
                     >
 
-                    Logout
-                </a>
+                    <span class="name-profile">
+                        Logout
+                    </span>
+                </button>
 
             </div>
 
         </aside>
 
 
-    <!-- Main content -->
-    <main class="main-content">
+        <!-- =========================
+             Main Content
+        ========================== -->
 
-        <div class="welcome-section">
-            <div>
-                <h1>Available Exams</h1>
-                <p>Active exams you're eligible to take right now.</p>
-            </div>
-        </div>
+        <main class="container-content">
 
-        <div class="dashboard-section">
-            <div id="examsContainer" class="exams-container">
-                
-            </div>
-            <p id="emptyMessage" class="empty-message" style="display:none;">
-                No active exams available right now. Check back later.
-            </p>
-        </div>
+            <!-- Page Header -->
+            <section class="welcome-section">
 
-    </main>
+                <div>
 
-</div>
+                    <h1>
+                        Available Exams
+                    </h1>
+
+                    <p>
+                        Active exams you're eligible to take right now.
+                    </p>
+
+                </div>
+
+            </section>
 
 
-<script src="../js/core/storage.js"></script>
-<script src="../js/core/auth.js"></script>
-<script src="../js/student/available-exams.js"></script>
+            <!-- Available Exams -->
+            <section class="dashboard-section">
+
+                <!-- JavaScript adds exam cards here -->
+                <div
+                    class="exams-container"
+                    id="examsContainer"
+                ></div>
+
+
+                <!-- Empty State -->
+                <p
+                    class="empty-message"
+                    id="emptyMessage"
+                    style="display: none;"
+                >
+                    No active exams available right now.
+                    Check back later.
+                </p>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================
+         JavaScript Files
+    ========================== -->
+
+    <script src="../js/core/storage.js"></script>
+
+    <script src="../js/core/auth.js"></script>
+
+    <script src="../js/student/available-exams.js"></script>
 
 </body>
+
 </html>

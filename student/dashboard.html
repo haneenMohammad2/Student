@@ -1,9 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -22,16 +21,15 @@
     >
 </head>
 
-  <body>
+<body>
 
-
-    <div class="dashboard-layout">
+    <div class="dashboard">
 
         <!-- Sidebar -->
+        <aside class="side-bar">
 
-        <aside class="sidebar">
-
-            <div class="logo">
+            <!-- Logo -->
+            <div class="title-dashboard">
 
                 <div class="logo-title">
 
@@ -40,104 +38,99 @@
                         alt="ExamTrack Logo"
                     >
 
-                    <h2>ExamTrack</h2>
+                    <p class="title">
+                        ExamTrack
+                    </p>
 
                 </div>
 
-                <p>Exam & Grade Tracking System</p>
+                <p class="subtitle">
+                    Exam &amp; Grade Tracking System
+                </p>
 
             </div>
 
-
             <!-- Navigation -->
-
-            <nav class="nav-menu">
+            <nav class="links">
 
                 <a
                     href="dashboard.html"
-                    class="nav-link active"
+                    class="link active"
                 >
                     <img
                         src="../assets/images/dash.png"
-                        alt="Dashboard"
+                        alt=""
                     >
 
-                    Dashboard
+                    <p class="name-link">
+                        Dashboard
+                    </p>
                 </a>
 
                 <a
-                    href="available-exams.html"
-                    class="nav-link"
-                >
+    href="available-exams.html"
+    class="link"
+>
                     <img
                         src="../assets/images/exam.png"
-                        alt="Exams"
+                        alt=""
                     >
 
-                    Exams
-                </a>
-
-                <a
-                    href="results.html"
-                    class="nav-link"
-                >
-                    <img
-                        src="../assets/images/result.png"
-                        alt="Results"
-                    >
-
-                    Results
+                    <p class="name-link">
+                        Exams
+                    </p>
                 </a>
 
             </nav>
 
-
-            <!-- Sidebar bottom -->
-
-            <div class="sidebar-bottom">
+            <!-- Sidebar Bottom -->
+            <div class="bottom-of-page">
 
                 <a
                     href="profile.html"
-                    class="nav-link"
+                    class="link-profile"
                 >
                     <img
+                        class="profile-icon"
                         src="../assets/images/profile.png"
-                        alt="Profile"
+                        alt=""
                     >
 
-                    Profile
+                    <span class="name-profile">
+                        Profile
+                    </span>
                 </a>
+<button
+    type="button"
+    class="link-logout"
+    id="logoutBtn"
+>
+    <img
+        src="../assets/images/logout.png"
+        alt="Logout"
+    >
 
-                <a
-                    href="../index.html"
-                    class="nav-link"
-                    onclick="clearSession()"
-                >
-                    <img
-                        src="../assets/images/logout.png"
-                        alt="Logout"
-                    >
+    <span class="name-profile">
+        Logout
+    </span>
 
-                    Logout
-                </a>
+</button>
+
 
             </div>
 
         </aside>
 
-
         <!-- Main Content -->
+        <main class="container-content">
 
-        <main class="main-content">
-
-            <!-- Welcome section -->
-
+            <!-- Welcome -->
             <section class="welcome-section">
 
                 <div>
 
                     <h1>
-                        welcome,
+                        Welcome,
                         <span id="studentName">
                             Student
                         </span>!
@@ -156,29 +149,18 @@
 
                 </div>
 
-
-                <!-- Student image -->
-
                 <img
+                    class="student-image"
                     src="../assets/images/person.png"
                     alt="Student Profile"
-                    width="48"
-                    height="48"
-                    style="
-                        border-radius: 50%;
-                        object-fit: cover;
-                    "
                 >
 
             </section>
 
-
             <!-- Statistics -->
-
             <section class="stats-grid">
 
-                <!-- Active exams -->
-
+                <!-- Active Exams -->
                 <div class="stat-card">
 
                     <div class="stat-icon blue">
@@ -192,7 +174,9 @@
 
                     <div>
 
-                        <span>ACTIVE EXAMS</span>
+                        <span>
+                            ACTIVE EXAMS
+                        </span>
 
                         <strong id="activeExams">
                             0
@@ -202,9 +186,7 @@
 
                 </div>
 
-
-                <!-- Completed exams -->
-
+                <!-- Completed Exams -->
                 <div class="stat-card">
 
                     <div class="stat-icon purple">
@@ -218,7 +200,9 @@
 
                     <div>
 
-                        <span>COMPLETED</span>
+                        <span>
+                            COMPLETED
+                        </span>
 
                         <strong id="completedExams">
                             0
@@ -228,9 +212,7 @@
 
                 </div>
 
-
-                <!-- Average grade -->
-
+                <!-- Average Grade -->
                 <div class="stat-card">
 
                     <div class="stat-icon orange">
@@ -244,7 +226,9 @@
 
                     <div>
 
-                        <span>AVG GRADE</span>
+                        <span>
+                            AVG GRADE
+                        </span>
 
                         <strong id="averageGrade">
                             0%
@@ -254,9 +238,7 @@
 
                 </div>
 
-
-                <!-- Passed percentage -->
-
+                <!-- Passed Percentage -->
                 <div class="stat-card">
 
                     <div class="stat-icon green">
@@ -270,7 +252,9 @@
 
                     <div>
 
-                        <span>PASSED</span>
+                        <span>
+                            PASSED
+                        </span>
 
                         <strong id="passedPercentage">
                             0%
@@ -282,21 +266,22 @@
 
             </section>
 
-
             <!-- Available Exams -->
-
             <section class="dashboard-section">
 
                 <div class="section-heading">
 
-                    <h2>Available Exams</h2>
+                    <h2>
+                        Available Exams
+                    </h2>
 
-                    <a href="available-exams.html">
+                    <a href="#">
                         View All
                     </a>
 
                 </div>
 
+                <!-- JavaScript adds exams here -->
                 <div
                     class="exams-container"
                     id="examsContainer"
@@ -311,18 +296,14 @@
 
             </section>
 
-
             <!-- Latest Results -->
-
             <section class="dashboard-section">
 
                 <div class="section-heading">
 
-                    <h2>Latest Results</h2>
-
-                    <a href="results.html">
-                        View All
-                    </a>
+                    <h2>
+                        Latest Results
+                    </h2>
 
                 </div>
 
@@ -341,6 +322,7 @@
 
                         </thead>
 
+                        <!-- JavaScript adds results here -->
                         <tbody id="resultsTable"></tbody>
 
                     </table>
@@ -360,9 +342,7 @@
 
     </div>
 
-
-    <!-- JavaScript files -->
-
+    <!-- JavaScript Files -->
     <script src="../js/core/storage.js"></script>
     <script src="../js/core/auth.js"></script>
     <script src="../js/student/dashboard-page.js"></script>

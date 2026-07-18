@@ -1,11 +1,18 @@
 
-
 const teacher = requireRole("Teacher");
 
-document.getElementById("logoutLink").addEventListener("click", function (e) {
-  e.preventDefault();
-  logout();
-});
+const logoutLink = document.getElementById("logoutLink");
+
+if (logoutLink) {
+    logoutLink.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        localStorage.removeItem("exam_session");
+        sessionStorage.clear();
+
+        window.location.href = "../index.html";
+    });
+}
 
 // Questions are kept in memory as a draft until "Save Exam" is clicked —
 // only then do we actually call addExam()/addQuestionToExam() from storage.js.

@@ -46,10 +46,23 @@ if (student) {
 }
 
 
- Logout
 
-document.getElementById("logoutBtn").onclick = function () {
+
+/*document.getElementById("logoutBtn").onclick = function () {
 
     logout();
 
-};
+};*/
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", function () {
+        localStorage.removeItem("exam_session");
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("selectedExamId");
+
+        sessionStorage.clear();
+
+        window.location.href = "../index.html";
+    });
+}

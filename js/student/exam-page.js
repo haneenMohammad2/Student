@@ -541,12 +541,28 @@ submitBtn.onclick = function () {
 // Calculate result
 // =========================
 
+// =========================
+// Calculate result
+// =========================
+
 function calculateResult() {
 
-    let correctAnswers = 0;
+    // Prevent submitting the same exam twice
+
+    const oldResult =
+        getResultByStudentAndExam(
+            student.id,
+            exam.id
+        );
+
+    if (oldResult) {
+        showResult(oldResult);
+        return;
+    }
 
 
-    // Check all answers
+    let correctAnswersCount = 0;
+
 
     exam.questions.forEach(
         function (question) {
@@ -554,36 +570,31 @@ function calculateResult() {
             const studentAnswer =
                 studentAnswers[question.id];
 
+
             if (
                 isAnswerCorrect(
                     question,
                     studentAnswer
                 )
             ) {
-                correctAnswers++;
+                correctAnswersCount++;
             }
 
         }
     );
 
 
-    // Calculate score
-
     const score = Math.round(
         (
-            correctAnswers /
+            correctAnswersCount /
             exam.questions.length
         ) * 100
     );
 
 
-    // Pass or fail
-
     const passed =
         score >= 50;
 
-
-    // Format answers
 
     const formattedAnswers =
         exam.questions.map(
@@ -602,8 +613,6 @@ function calculateResult() {
             }
         );
 
-
-    // Create result
 
     const result = {
 
@@ -625,22 +634,16 @@ function calculateResult() {
     };
 
 
-    // Save result
-
     results.push(result);
 
     saveResults(results);
 
-
-    // Save selected result
 
     localStorage.setItem(
         "selectedResultId",
         result.id
     );
 
-
-    // Clear exam progress
 
     sessionStorage.removeItem(
         "currentQuestion"
@@ -650,8 +653,359 @@ function calculateResult() {
         "studentAnswers"
     );
 
+    sessionStorage.removeItem(
+        "reviewMode"
+    );
 
-    // Open result page
 
-   window.location.href = "results.html";
+    // Display result inside the same page
+
+    showResult(result);
+}
+
+
+// =========================
+// Get result elements
+// =========================
+
+const examContent =
+    document.getElementById("examContent");
+
+const resultSection =
+    document.getElementById("resultSection");
+
+const reviewSection =
+    document.getElementById("reviewSection");
+
+const progressContainer =
+    document.getElementById("progressContainer");
+
+const examHeaderInfo =
+    document.getElementById("examHeaderInfo");
+
+const resultIcon =
+    document.getElementById("resultIcon");
+
+const resultTitle =
+    document.getElementById("resultTitle");
+
+const resultExamName =
+    document.getElementById("resultExamName");
+
+const resultStatus =
+    document.getElementById("resultStatus");
+
+const scoreElement =
+    document.getElementById("score");
+
+const correctAnswersElement =
+    document.getElementById("correctAnswers");
+
+const incorrectAnswersElement =
+    document.getElementById("incorrectAnswers");
+
+const totalResultQuestions =
+    document.getElementById("totalResultQuestions");
+
+const resultMessage =
+    document.getElementById("resultMessage");
+
+const reviewAnswersBtn =
+    document.getElementById("reviewAnswersBtn");
+
+const backToResultBtn =
+    document.getElementById("backToResultBtn");
+
+const reviewAnswersContainer =
+    document.getElementById(
+        "reviewAnswersContainer"
+    );
+
+
+// =========================
+// Display result
+// =========================
+
+function showResult(result) {
+
+    examContent.hidden = true;
+
+    resultSection.hidden = false;
+
+    reviewSection.hidden = true;
+
+    progressContainer.style.display =
+        "none";
+
+    examHeaderInfo.style.display =
+        "none";
+
+
+    const total =
+        exam.questions.length;
+
+    const correct =
+        Math.round(
+            (
+                Number(result.score) /
+                100
+            ) * total
+        );
+
+    const incorrect =
+        total - correct;
+
+
+    resultExamName.textContent =
+        exam.title;
+
+    scoreElement.textContent =
+        result.score + "%";
+
+    correctAnswersElement.textContent =
+        correct;
+
+    incorrectAnswersElement.textContent =
+        incorrect;
+
+    totalResultQuestions.textContent =
+        total;
+
+
+    resultSection.classList.remove(
+        "passed",
+        "failed"
+    );
+
+
+    if (result.passed === true) {
+
+        resultSection.classList.add(
+            "passed"
+        );
+
+        resultIcon.textContent = "✓";
+
+        resultTitle.textContent =
+            "Congratulations!";
+
+        resultStatus.textContent =
+            "Passed";
+
+        resultMessage.textContent =
+            "You passed the exam successfully.";
+
+    } else {
+
+        resultSection.classList.add(
+            "failed"
+        );
+
+        resultIcon.textContent = "✕";
+
+        resultTitle.textContent =
+            "Exam Completed";
+
+        resultStatus.textContent =
+            "Failed";
+
+        resultMessage.textContent =
+            "Keep practicing and try again next time.";
+
+    }
+}
+
+
+// =========================
+// Review button
+// =========================
+
+reviewAnswersBtn.addEventListener(
+    "click",
+    function () {
+
+        const result =
+            getResultByStudentAndExam(
+                student.id,
+                exam.id
+            );
+
+
+        if (!result) {
+            return;
+        }
+
+
+        showReviewAnswers(result);
+
+    }
+);
+
+
+// =========================
+// Display reviewed answers
+// =========================
+
+function showReviewAnswers(result) {
+
+    examContent.hidden = true;
+
+    resultSection.hidden = true;
+
+    reviewSection.hidden = false;
+
+    progressContainer.style.display =
+        "none";
+
+    examHeaderInfo.style.display =
+        "none";
+
+    reviewAnswersContainer.innerHTML =
+        "";
+
+
+    const reviewedAnswers =
+        getAnswerReview(result);
+
+
+    reviewedAnswers.forEach(
+        function (answer, index) {
+
+            const answerClass =
+                answer.isCorrect
+                    ? "correct"
+                    : "incorrect";
+
+
+            const studentAnswer =
+                formatAnswer(
+                    answer.studentAnswer
+                );
+
+
+            const correctAnswer =
+                formatAnswer(
+                    answer.correctAnswer
+                );
+
+
+            reviewAnswersContainer.innerHTML += `
+                <article
+                    class="review-answer-card ${answerClass}"
+                >
+
+                    <p class="review-question-number">
+                        QUESTION ${index + 1}
+                    </p>
+
+                    <h3 class="review-question-text">
+                        ${answer.questionText}
+                    </h3>
+
+                    <p
+                        class="review-user-answer ${answerClass}"
+                    >
+                        <strong>Your answer:</strong>
+                        ${studentAnswer}
+                    </p>
+
+                    <p class="review-correct-answer">
+                        <strong>Correct answer:</strong>
+                        ${correctAnswer}
+                    </p>
+
+                </article>
+            `;
+
+        }
+    );
+}
+
+
+// =========================
+// Format displayed answer
+// =========================
+
+function formatAnswer(answer) {
+
+    if (Array.isArray(answer)) {
+        return answer.join(", ");
+    }
+
+
+    if (
+        answer === undefined ||
+        answer === null ||
+        answer === ""
+    ) {
+        return "No answer";
+    }
+
+
+    if (answer === true) {
+        return "True";
+    }
+
+
+    if (answer === false) {
+        return "False";
+    }
+
+
+    return String(answer);
+}
+
+
+// =========================
+// Back to result
+// =========================
+
+backToResultBtn.addEventListener(
+    "click",
+    function () {
+
+        const result =
+            getResultByStudentAndExam(
+                student.id,
+                exam.id
+            );
+
+
+        if (result) {
+            showResult(result);
+        }
+
+    }
+);
+
+
+// =========================
+// Open page in review mode
+// =========================
+
+const reviewMode =
+    sessionStorage.getItem(
+        "reviewMode"
+    ) === "true";
+
+
+if (reviewMode) {
+
+    const savedResult =
+        getResultByStudentAndExam(
+            student.id,
+            exam.id
+        );
+
+
+    if (savedResult) {
+        showReviewAnswers(
+            savedResult
+        );
+    }
+
+
+    sessionStorage.removeItem(
+        "reviewMode"
+    );
 }

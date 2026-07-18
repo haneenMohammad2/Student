@@ -135,3 +135,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
     });
 });
+const logoutLink = document.getElementById("logoutLink");
+
+if (logoutLink) {
+    logoutLink.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        localStorage.removeItem("exam_session");
+        sessionStorage.clear();
+
+        window.location.href = "../index.html";
+    });
+}

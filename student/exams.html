@@ -24,148 +24,367 @@
 
 <body>
 
-<div class="exam-page">
+    <div class="exam-page">
 
-    <!-- Exam Header -->
-    <header class="exam-header">
+        <!-- =========================
+             Exam Header
+        ========================== -->
 
-        <div class="exam-logo">
-            <img
-                src="../assets/images/logo1.png"
-                alt="ExamTrack Logo"
+        <header class="exam-header">
+
+            <div class="exam-logo">
+
+                <img
+                    src="../assets/images/logo1.png"
+                    alt="ExamTrack Logo"
+                >
+
+                <h2>ExamTrack</h2>
+
+            </div>
+
+            <h3 id="examTitle">
+                Exam
+            </h3>
+
+            <div
+                class="exam-header-info"
+                id="examHeaderInfo"
             >
 
-            <h2>ExamTrack</h2>
-        </div>
+                <span class="question-count">
 
-        <h3 id="examTitle">
-            Exam
-        </h3>
+                    <span id="currentQuestionNumber">
+                        1
+                    </span>
 
-        <div class="exam-header-info">
+                    /
 
-            <span class="question-count">
-                <span id="currentQuestionNumber">1</span>
-                /
-                <span id="totalQuestions">0</span>
-                Questions
-            </span>
+                    <span id="totalQuestions">
+                        0
+                    </span>
 
-            <span class="exam-timer">
-                ⏱
-                <span id="timer">00:00</span>
-            </span>
+                    Questions
 
-        </div>
+                </span>
 
-    </header>
+                <span class="exam-timer">
+
+                    ⏱
+
+                    <span id="timer">
+                        00:00
+                    </span>
+
+                </span>
+
+            </div>
+
+        </header>
 
 
-    <!-- Progress -->
-    <div class="progress-container">
+        <!-- =========================
+             Progress Bar
+        ========================== -->
 
         <div
-            class="progress-bar"
-            id="progressBar"
-        ></div>
+            class="progress-container"
+            id="progressContainer"
+        >
 
-    </div>
+            <div
+                class="progress-bar"
+                id="progressBar"
+            ></div>
+
+        </div>
 
 
-    <!-- Main Exam Content -->
-    <main class="exam-main">
+        <!-- =========================
+             Main Content
+        ========================== -->
 
-        <!-- Question Card -->
-        <section class="question-card">
+        <main class="exam-main">
 
-            <div class="question-header">
 
-                <div>
-                    <span
-                        class="question-label"
-                        id="questionLabel"
+            <!-- =========================
+                 Question Section
+            ========================== -->
+
+            <div id="examContent">
+
+                <section
+                    class="question-card"
+                    id="questionCard"
+                >
+
+                    <div class="question-header">
+
+                        <div>
+
+                            <span
+                                class="question-label"
+                                id="questionLabel"
+                            >
+                                QUESTION 1
+                            </span>
+
+                            <span
+                                class="question-type"
+                                id="questionType"
+                            >
+                                QUESTION TYPE
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Question Text -->
+
+                    <h2
+                        class="question-text"
+                        id="questionText"
                     >
-                        QUESTION 1
-                    </span>
+                        Loading question...
+                    </h2>
 
-                    <span
-                        class="question-type"
-                        id="questionType"
+
+                    <!-- JavaScript adds answers here -->
+
+                    <div
+                        class="answers-container"
+                        id="answersContainer"
+                    ></div>
+
+
+                    <!-- Error Message -->
+
+                    <p
+                        class="answer-message"
+                        id="answerMessage"
+                    ></p>
+
+                </section>
+
+
+                <!-- Navigation Buttons -->
+
+                <div
+                    class="exam-navigation"
+                    id="examNavigation"
+                >
+
+                    <button
+                        type="button"
+                        class="previous-button"
+                        id="previousBtn"
                     >
-                        QUESTION TYPE
-                    </span>
+                        Previous
+                    </button>
+
+                    <button
+                        type="button"
+                        class="next-button"
+                        id="nextBtn"
+                    >
+                        Next
+                    </button>
+
+                    <button
+                        type="button"
+                        class="submit-exam-button"
+                        id="submitBtn"
+                    >
+                        Finish & Submit Exam
+                    </button>
+
                 </div>
 
             </div>
 
 
-            <!-- Question Text -->
-            <h2
-                class="question-text"
-                id="questionText"
+            <!-- =========================
+                 Result Section
+            ========================== -->
+
+            <section
+                class="result-card"
+                id="resultSection"
+                hidden
             >
-                Loading question...
-            </h2>
+
+                <div
+                    class="result-icon"
+                    id="resultIcon"
+                >
+                    ✓
+                </div>
+
+                <h1 id="resultTitle">
+                    Exam Completed
+                </h1>
+
+                <p
+                    class="exam-name"
+                    id="resultExamName"
+                >
+                    Exam
+                </p>
+
+                <span
+                    class="result-badge"
+                    id="resultStatus"
+                >
+                    Passed
+                </span>
 
 
-            <!-- JavaScript adds answers here -->
-            <div
-                class="answers-container"
-                id="answersContainer"
-            ></div>
+                <!-- Result Statistics -->
+
+                <div class="result-statistics">
+
+                    <div class="result-stat">
+
+                        <span>SCORE</span>
+
+                        <strong id="score">
+                            0%
+                        </strong>
+
+                    </div>
+
+                    <div class="result-stat">
+
+                        <span>CORRECT</span>
+
+                        <strong id="correctAnswers">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="result-stat">
+
+                        <span>INCORRECT</span>
+
+                        <strong id="incorrectAnswers">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="result-stat">
+
+                        <span>TOTAL</span>
+
+                        <strong id="totalResultQuestions">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
 
 
-            <!-- Error Message -->
-            <p
-                class="answer-message"
-                id="answerMessage"
-            ></p>
+                <!-- Result Message -->
 
-        </section>
+                <p
+                    class="result-message"
+                    id="resultMessage"
+                ></p>
+
+                <p class="result-description">
+                    You can review your answers and see the
+                    correct answers.
+                </p>
 
 
-        <!-- Navigation Buttons -->
-        <div class="exam-navigation">
+                <!-- Result Buttons -->
 
-            <button
-                type="button"
-                class="previous-button"
-                id="previousBtn"
+                <div class="result-buttons">
+
+                    <button
+                        type="button"
+                        class="review-exam-button"
+                        id="reviewAnswersBtn"
+                    >
+                        Review Answers
+                    </button>
+
+                    <a
+                        href="dashboard.html"
+                        class="back-dashboard-button"
+                    >
+                        Back to Dashboard
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 Review Answers Section
+            ========================== -->
+
+            <section
+                class="review-section"
+                id="reviewSection"
+                hidden
             >
-                Previous
-            </button>
 
-            <button
-                type="button"
-                class="next-button"
-                id="nextBtn"
-            >
-                Next
-            </button>
+                <div class="review-header">
 
-            <button
-                type="button"
-                class="submit-exam-button"
-                id="submitBtn"
-            >
-                Finish & Submit Exam
-            </button>
+                    <div>
 
-        </div>
+                        <h2>
+                            Review Answers
+                        </h2>
 
-    </main>
+                        <p>
+                            Check your answers and compare them
+                            with the correct answers.
+                        </p>
 
-</div>
+                    </div>
 
+                    <button
+                        type="button"
+                        class="back-result-button"
+                        id="backToResultBtn"
+                    >
+                        Back to Result
+                    </button>
 
-<!-- JavaScript files: order is important -->
-
-<script src="../js/core/storage.js"></script>
-<script src="../js/core/auth.js"></script>
-<script src="../js/student/exam-page.js"></script>
+                </div>
 
 
+                <!-- JavaScript adds reviewed answers here -->
 
+                <div
+                    class="review-answers-container"
+                    id="reviewAnswersContainer"
+                ></div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================
+         JavaScript Files
+    ========================== -->
+
+    <script src="../js/core/storage.js"></script>
+
+    <script src="../js/core/auth.js"></script>
+
+    <script src="../js/student/exam-page.js"></script>
 
 </body>
+
 </html>
