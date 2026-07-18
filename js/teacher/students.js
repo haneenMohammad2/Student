@@ -183,6 +183,26 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="row-actions">
             <button
               type="button"
+              class="icon-btn view"
+              title="View"
+              data-action="view"
+              data-student-id="${escapeHTML(student.id)}"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+
+            <button
+              type="button"
               class="icon-btn edit"
               title="Edit"
               data-action="edit"
@@ -244,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ========================================
-  // Edit وDelete باستخدام Event Delegation
+  // View، Edit وDelete باستخدام Event Delegation
   // ========================================
 
   if (studentsTableBody) {
@@ -264,6 +284,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const action =
           actionButton.dataset.action;
 
+        if (action === "view") {
+          viewStudent(studentId);
+        }
+
         if (action === "edit") {
           editStudent(studentId);
         }
@@ -273,6 +297,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     );
+  }
+
+  // ========================================
+  // عرض تفاصيل الطالب
+  // ========================================
+
+  function viewStudent(studentId) {
+    window.location.href =
+      `student-details.html?studentId=${encodeURIComponent(studentId)}`;
   }
 
   // ========================================

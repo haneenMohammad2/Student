@@ -107,6 +107,7 @@
               <img src="../assets/images/COMPLETED.png" alt="Completed Exams" />
             </div>
 
+
             <div>
               <span> COMPLETED </span>
 
@@ -187,6 +188,230 @@
           <span id="quoteAuthor"></span>
         </div>
       </main>
+
+        </aside>
+
+        <!-- Main Content -->
+        <main class="container-content">
+
+            <!-- Welcome -->
+            <section class="welcome-section">
+
+                <div>
+
+                    <h1>
+                        Welcome,
+                        <span id="studentName">
+                            Student
+                        </span>!
+                    </h1>
+
+                    <p>
+                        You have
+
+                        <span id="pendingExams">
+                            0
+                        </span>
+
+                        pending exams this week.
+                        Keep up the great work!
+                    </p>
+
+                </div>
+
+                <img
+                    class="student-image"
+                    src="../assets/images/person.png"
+                    alt="Student Profile"
+                >
+
+            </section>
+
+            <!-- Statistics -->
+            <section class="stats-grid">
+
+                <!-- Active Exams -->
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <img
+                            src="../assets/images/ACTIVE.png"
+                            alt="Active Exams"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            ACTIVE EXAMS
+                        </span>
+
+                        <strong id="activeExams">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <!-- Completed Exams -->
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+
+                        <img
+                            src="../assets/images/COMPLETED.png"
+                            alt="Completed Exams"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            COMPLETED
+                        </span>
+
+                        <strong id="completedExams">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <!-- Average Grade -->
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+
+                        <img
+                            src="../assets/images/avg.png"
+                            alt="Average Grade"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            AVG GRADE
+                        </span>
+
+                        <strong id="averageGrade">
+                            0%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <!-- Passed Percentage -->
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+
+                        <img
+                            src="../assets/images/PASSED.png"
+                            alt="Passed Percentage"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            PASSED
+                        </span>
+
+                        <strong id="passedPercentage">
+                            0%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Available Exams -->
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Available Exams
+                    </h2>
+
+                    <a href="/student/available-exams.html">
+                        View All
+                    </a>
+
+                </div>
+
+                <!-- JavaScript adds exams here -->
+                <div
+                    class="exams-container"
+                    id="examsContainer"
+                ></div>
+
+                <p
+                    class="empty-message"
+                    id="noExamsMessage"
+                >
+                    No available exams.
+                </p>
+
+            </section>
+
+            <!-- Latest Results -->
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Latest Results
+                    </h2>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>EXAM NAME</th>
+                                <th>DATE TAKEN</th>
+                                <th>STATUS</th>
+                                <th>SCORE</th>
+                            </tr>
+
+                        </thead>
+
+                        <!-- JavaScript adds results here -->
+                        <tbody id="resultsTable"></tbody>
+
+                    </table>
+
+                    <p
+                        class="empty-message"
+                        id="noResultsMessage"
+                    >
+                        No results available.
+                    </p>
+
+                </div>
+
+            </section>
+            <div class="quote-card">
+    <h3>Daily Motivation</h3>
+    <p id="quote">Loading...</p>
+    <span id="quoteAuthor"></span>
+>>>>>>> ae744ed3971848edc0560bedfb1b8ef94820abe7
     </div>
 
     <!-- JavaScript Files -->
