@@ -3,6 +3,13 @@ const exams = getExams();
 const activeExams = getActiveExams();
 
 window.addEventListener("DOMContentLoaded", () => {
+
+    const teacher = getCurrentUser();
+
+    if (teacher) {
+        document.getElementById("teacherName").textContent = teacher.name.toUpperCase();
+    }
+
     // Dashboard statistics
     document.getElementById("totalStudents").textContent = students.length;
     document.getElementById("totalExams").textContent = exams.length;

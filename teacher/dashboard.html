@@ -115,7 +115,12 @@
                 fill="#BA1A1A"
               />
             </svg>
-            <a href="../index.html" class="name-profile">Logout</a>
+            <a
+              href="../index.html"
+              class="name-profile"
+              onclick="clearSession()"
+              >Logout</a
+            >
           </div>
         </div>
       </div>
@@ -123,7 +128,7 @@
       <div class="container-content">
         <div class="header">
           <div class="welcome">
-            <h1>Welcome back, Teacher!</h1>
+            <h1>Welcome back, <span id="teacherName"></span>!</h1>
             <p>Here is an overview of your students and exams today.</p>
           </div>
           <img
@@ -223,7 +228,7 @@
               <div class="text-recent-student">
                 <p>Recent Student</p>
               </div>
-              <div class="container-search-recent-student">
+              <!--<div class="container-search-recent-student">
                 <div class="icon-search-recent-student">
                   <svg
                     width="14"
@@ -243,7 +248,7 @@
                   placeholder="Search..."
                   class="input-search-recent-student"
                 />
-              </div>
+              </div>-->
             </div>
             <table class="content-recent-student">
               <thead>

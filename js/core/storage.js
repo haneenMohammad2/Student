@@ -142,6 +142,9 @@ function addExam(examData) {
 function getActiveExams() {
   return getExams().filter((e) => e.status === "Active");
 }
+function getInactiveExams() {
+  return getExams().filter((e) => e.status === "Inactive");
+}
 function updateExam(id, updates) {
   const exams = getExams();
   const index = exams.findIndex((e) => e.id === id);
@@ -194,6 +197,10 @@ function getResultByStudentAndExam(studentId, examId) {
       (r) => r.studentId === studentId && r.examId === examId
     ) || null
   );
+}
+
+function getTotalSubmissions() {
+  return getResults().length;
 }
 //
 

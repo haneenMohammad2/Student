@@ -1,173 +1,458 @@
-
-
 const teacher = requireRole("Teacher");
 
-document.getElementById("logoutLink").addEventListener("click", function (e) {
-  e.preventDefault();
-  logout();
-});
+document
+  .getElementById("logoutLink")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    logout();
+  });
 
-// Questions are kept in memory as a draft until "Save Exam" is clicked —
-// only then do we actually call addExam()/addQuestionToExam() from storage.js.
+// ========================================
+// معرفة هل الصفحة Create أم Edit
+// ========================================
+
+const urlParams = new URLSearchParams(window.location.search);
+const editingExamId = urlParams.get("examId");
+
+let editingExam = null;
 let draftQuestions = [];
+
+if (editingExamId) {
+  editingExam = getExamById(editingExamId);
+
+  if (!editingExam) {
+    alert("Exam not found.");
+    window.location.href = "exams.html";
+  }
+}
+
+// ========================================
+// عناصر الصفحة
+// ========================================
 
 const qTypeSelect = document.getElementById("qType");
 const qOptionsArea = document.getElementById("qOptionsArea");
+const formError = document.getElementById("formError");
+
+// ========================================
+// عرض الحقول حسب نوع السؤال
+// ========================================
 
 function renderOptionsArea() {
   const type = qTypeSelect.value;
 
   if (type === "mcq") {
     qOptionsArea.innerHTML = `
-      <div class="ce-field"><label>Option 1</label><input type="text" class="qOpt"></div>
-      <div class="ce-field"><label>Option 2</label><input type="text" class="qOpt"></div>
-      <div class="ce-field"><label>Option 3</label><input type="text" class="qOpt"></div>
-      <div class="ce-field"><label>Option 4</label><input type="text" class="qOpt"></div>
+      <div class="ce-field">
+        <label>Option 1</label>
+        <input type="text" class="qOpt">
+      </div>
+
+      <div class="ce-field">
+        <label>Option 2</label>
+        <input type="text" class="qOpt">
+      </div>
+
+      <div class="ce-field">
+        <label>Option 3</label>
+        <input type="text" class="qOpt">
+      </div>
+
+      <div class="ce-field">
+        <label>Option 4</label>
+        <input type="text" class="qOpt">
+      </div>
+
       <div class="ce-field ce-field-wide">
         <label>Correct Answer</label>
-        <input type="text" id="qCorrectSingle" placeholder="Must match one of the options exactly">
-      </div>`;
+        <input
+          type="text"
+          id="qCorrectSingle"
+          placeholder="Must match one of the options exactly"
+        >
+      </div>
+    `;
   } else if (type === "true_false") {
     qOptionsArea.innerHTML = `
       <div class="ce-field ce-field-wide">
         <label>Correct Answer</label>
+
         <select id="qCorrectBool">
           <option value="true">True</option>
           <option value="false">False</option>
         </select>
-      </div>`;
+      </div>
+    `;
   } else if (type === "multiple_answer") {
     qOptionsArea.innerHTML = `
-      <div class="ce-field"><label>Option 1</label><input type="text" class="qOpt"></div>
-      <div class="ce-field"><label>Option 2</label><input type="text" class="qOpt"></div>
-      <div class="ce-field"><label>Option 3</label><input type="text" class="qOpt"></div>
-      <div class="ce-field"><label>Option 4</label><input type="text" class="qOpt"></div>
+      <div class="ce-field">
+        <label>Option 1</label>
+        <input type="text" class="qOpt">
+      </div>
+
+      <div class="ce-field">
+        <label>Option 2</label>
+        <input type="text" class="qOpt">
+      </div>
+
+      <div class="ce-field">
+        <label>Option 3</label>
+        <input type="text" class="qOpt">
+      </div>
+
+      <div class="ce-field">
+        <label>Option 4</label>
+        <input type="text" class="qOpt">
+      </div>
+
       <div class="ce-field ce-field-wide">
         <label>Correct Answers</label>
-        <input type="text" id="qCorrectMulti" placeholder="Comma-separated, e.g. 4, 8">
-      </div>`;
+        <input
+          type="text"
+          id="qCorrectMulti"
+          placeholder="Comma-separated, e.g. 4, 8"
+        >
+      </div>
+    `;
   } else if (type === "short_answer") {
     qOptionsArea.innerHTML = `
       <div class="ce-field ce-field-wide">
         <label>Correct Answer (number)</label>
         <input type="number" id="qCorrectShort">
-      </div>`;
+      </div>
+    `;
   }
 }
+
 qTypeSelect.addEventListener("change", renderOptionsArea);
-renderOptionsArea(); // initial render
+renderOptionsArea();
+
+// ========================================
+// عرض قائمة الأسئلة
+// ========================================
 
 function renderQuestionList() {
   const list = document.getElementById("questionList");
   const emptyState = document.getElementById("emptyState");
-  document.getElementById("questionCount").textContent =
-    `${draftQuestions.length} question${draftQuestions.length === 1 ? "" : "s"} added`;
+  const questionCount = document.getElementById("questionCount");
 
-  if (!draftQuestions.length) {
+  questionCount.textContent =
+    `${draftQuestions.length} question` +
+    `${draftQuestions.length === 1 ? "" : "s"} added`;
+
+  if (draftQuestions.length === 0) {
     list.innerHTML = "";
-    list.appendChild(emptyState);
+
+    if (emptyState) {
+      list.appendChild(emptyState);
+    }
+
     return;
   }
 
-  list.innerHTML = draftQuestions.map((q, i) => `
-    <div class="ce-question-row">
-      <div>
-        <span class="ce-question-type">${q.type.replace("_", " ")}</span>
-        <p class="ce-question-text">${i + 1}. ${q.text}</p>
-      </div>
-      <button type="button" class="ce-remove-btn" data-index="${i}">Remove</button>
-    </div>
-  `).join("");
+  list.innerHTML = draftQuestions
+    .map(function (question, index) {
+      return `
+        <div class="ce-question-row">
+          <div>
+            <span class="ce-question-type">
+              ${escapeHTML(question.type.replaceAll("_", " "))}
+            </span>
 
-  list.querySelectorAll(".ce-remove-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      draftQuestions.splice(Number(btn.dataset.index), 1);
+            <p class="ce-question-text">
+              ${index + 1}. ${escapeHTML(question.text)}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="ce-remove-btn"
+            data-index="${index}"
+          >
+            Remove
+          </button>
+        </div>
+      `;
+    })
+    .join("");
+
+  list.querySelectorAll(".ce-remove-btn").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const questionIndex = Number(button.dataset.index);
+
+      draftQuestions.splice(questionIndex, 1);
+
       renderQuestionList();
     });
   });
 }
 
-document.getElementById("addQuestionBtn").addEventListener("click", function () {
-  const type = qTypeSelect.value;
-  const text = document.getElementById("qText").value.trim();
-  const formError = document.getElementById("formError");
-  formError.style.display = "none";
+// ========================================
+// تحميل الامتحان عند التعديل
+// ========================================
 
-  if (!text) {
-    formError.textContent = "Please enter the question text.";
-    formError.style.display = "block";
+function loadExamForEditing() {
+  if (!editingExam) {
+    renderQuestionList();
     return;
   }
 
-  let question = { type, text };
+  document.getElementById("examTitle").value =
+    editingExam.title || "";
 
-  if (type === "mcq") {
-    const options = [...document.querySelectorAll(".qOpt")].map(i => i.value.trim()).filter(Boolean);
-    const correctAnswer = document.getElementById("qCorrectSingle").value.trim();
-    if (options.length < 2 || !correctAnswer) {
-      formError.textContent = "Add at least 2 options and a correct answer.";
-      formError.style.display = "block";
-      return;
-    }
-    question.options = options;
-    question.correctAnswer = correctAnswer;
-  } else if (type === "true_false") {
-    question.correctAnswer = document.getElementById("qCorrectBool").value === "true";
-  } else if (type === "multiple_answer") {
-    const options = [...document.querySelectorAll(".qOpt")].map(i => i.value.trim()).filter(Boolean);
-    const correctAnswers = document.getElementById("qCorrectMulti").value
-      .split(",").map(v => v.trim()).filter(Boolean);
-    if (options.length < 2 || !correctAnswers.length) {
-      formError.textContent = "Add at least 2 options and at least 1 correct answer.";
-      formError.style.display = "block";
-      return;
-    }
-    question.options = options;
-    question.correctAnswers = correctAnswers;
-  } else if (type === "short_answer") {
-    const correctAnswer = document.getElementById("qCorrectShort").value;
-    if (correctAnswer === "") {
-      formError.textContent = "Please enter the correct numeric answer.";
-      formError.style.display = "block";
-      return;
-    }
-    question.correctAnswer = Number(correctAnswer);
+  document.getElementById("examDateTime").value =
+    editingExam.dateTime || "";
+
+  document.getElementById("examStatus").value =
+    editingExam.status || "Inactive";
+
+  // نسخة مستقلة من الأسئلة حتى لا تتغير البيانات
+  // الأصلية قبل الضغط على Update Exam
+  draftQuestions = Array.isArray(editingExam.questions)
+    ? editingExam.questions.map(function (question) {
+        return {
+          ...question,
+
+          options: Array.isArray(question.options)
+            ? [...question.options]
+            : undefined,
+
+          correctAnswers: Array.isArray(question.correctAnswers)
+            ? [...question.correctAnswers]
+            : undefined,
+        };
+      })
+    : [];
+
+  const saveButton = document.getElementById("saveExamBtn");
+
+  if (saveButton) {
+    saveButton.textContent = "Update Exam";
   }
 
-  draftQuestions.push(question);
-  renderQuestionList();
+  const pageTitle = document.querySelector("h1");
 
-  // Reset the add-question form for the next question
+  if (pageTitle) {
+    pageTitle.textContent = "Edit Exam";
+  }
+
+  renderQuestionList();
+}
+
+loadExamForEditing();
+
+// ========================================
+// إضافة سؤال إلى المسودة
+// ========================================
+
+document
+  .getElementById("addQuestionBtn")
+  .addEventListener("click", function () {
+    const type = qTypeSelect.value;
+    const text = document.getElementById("qText").value.trim();
+
+    hideError();
+
+    if (!text) {
+      showError("Please enter the question text.");
+      return;
+    }
+
+    const question = {
+      type: type,
+      text: text,
+    };
+
+    if (type === "mcq") {
+      const options = Array.from(
+        document.querySelectorAll(".qOpt")
+      )
+        .map(function (input) {
+          return input.value.trim();
+        })
+        .filter(Boolean);
+
+      const correctAnswer = document
+        .getElementById("qCorrectSingle")
+        .value.trim();
+
+      if (options.length < 2) {
+        showError("Add at least 2 options.");
+        return;
+      }
+
+      if (!correctAnswer) {
+        showError("Please enter the correct answer.");
+        return;
+      }
+
+      if (!options.includes(correctAnswer)) {
+        showError(
+          "The correct answer must exactly match one of the options."
+        );
+        return;
+      }
+
+      question.options = options;
+      question.correctAnswer = correctAnswer;
+    } else if (type === "true_false") {
+      question.correctAnswer =
+        document.getElementById("qCorrectBool").value === "true";
+    } else if (type === "multiple_answer") {
+      const options = Array.from(
+        document.querySelectorAll(".qOpt")
+      )
+        .map(function (input) {
+          return input.value.trim();
+        })
+        .filter(Boolean);
+
+      const correctAnswers = document
+        .getElementById("qCorrectMulti")
+        .value.split(",")
+        .map(function (value) {
+          return value.trim();
+        })
+        .filter(Boolean);
+
+      if (options.length < 2) {
+        showError("Add at least 2 options.");
+        return;
+      }
+
+      if (correctAnswers.length === 0) {
+        showError("Add at least 1 correct answer.");
+        return;
+      }
+
+      const hasInvalidAnswer = correctAnswers.some(function (answer) {
+        return !options.includes(answer);
+      });
+
+      if (hasInvalidAnswer) {
+        showError(
+          "Every correct answer must exactly match one of the options."
+        );
+        return;
+      }
+
+      question.options = options;
+      question.correctAnswers = correctAnswers;
+    } else if (type === "short_answer") {
+      const correctAnswer =
+        document.getElementById("qCorrectShort").value;
+
+      if (correctAnswer === "") {
+        showError("Please enter the correct numeric answer.");
+        return;
+      }
+
+      question.correctAnswer = Number(correctAnswer);
+    }
+
+    draftQuestions.push(question);
+
+    renderQuestionList();
+    resetQuestionForm();
+  });
+
+// ========================================
+// حفظ أو تعديل الامتحان
+// ========================================
+
+document
+  .getElementById("saveExamBtn")
+  .addEventListener("click", function () {
+    const title = document
+      .getElementById("examTitle")
+      .value.trim();
+
+    const dateTime =
+      document.getElementById("examDateTime").value;
+
+    const status =
+      document.getElementById("examStatus").value;
+
+    hideError();
+
+    if (!title || !dateTime) {
+      showError(
+        "Please fill in the exam title and date/time."
+      );
+      return;
+    }
+
+    if (draftQuestions.length === 0) {
+      showError(
+        "Add at least one question before saving."
+      );
+      return;
+    }
+
+    if (editingExamId) {
+      // الأسئلة القديمة تحتفظ بالـ id الخاص بها.
+      // السؤال الجديد فقط يحصل على id جديد.
+      const updatedQuestions = draftQuestions.map(
+        function (question) {
+          if (question.id) {
+            return question;
+          }
+
+          return {
+            id: generateId("q"),
+            ...question,
+          };
+        }
+      );
+
+      updateExam(editingExamId, {
+        title: title,
+        dateTime: dateTime,
+        status: status,
+        numQuestions: updatedQuestions.length,
+        questions: updatedQuestions,
+      });
+    } else {
+      const newExam = addExam({
+        title: title,
+        dateTime: dateTime,
+        status: status,
+        numQuestions: draftQuestions.length,
+      });
+
+      draftQuestions.forEach(function (question) {
+        addQuestionToExam(newExam.id, question);
+      });
+    }
+
+    window.location.href = "exams.html";
+  });
+
+// ========================================
+// دوال مساعدة
+// ========================================
+
+function resetQuestionForm() {
   document.getElementById("qText").value = "";
   qTypeSelect.value = "mcq";
   renderOptionsArea();
-});
+}
 
-document.getElementById("saveExamBtn").addEventListener("click", function () {
-  const title = document.getElementById("examTitle").value.trim();
-  const dateTime = document.getElementById("examDateTime").value;
-  const status = document.getElementById("examStatus").value;
-  const formError = document.getElementById("formError");
+function showError(message) {
+  formError.textContent = message;
+  formError.style.display = "block";
+}
 
-  if (!title || !dateTime) {
-    formError.textContent = "Please fill in the exam title and date/time.";
-    formError.style.display = "block";
-    return;
-  }
-  if (!draftQuestions.length) {
-    formError.textContent = "Add at least one question before saving.";
-    formError.style.display = "block";
-    return;
-  }
+function hideError() {
+  formError.textContent = "";
+  formError.style.display = "none";
+}
 
-  const exam = addExam({
-    title,
-    dateTime,
-    numQuestions: draftQuestions.length,
-    status,
-  });
-
-  draftQuestions.forEach(q => addQuestionToExam(exam.id, q));
-
-  window.location.href = "exams.html";
-});
+function escapeHTML(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
